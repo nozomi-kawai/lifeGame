@@ -15,30 +15,43 @@ namespace LifeGame
     {
         private Bitmap displayBmp;
         private Bitmap updateBmp;
-        private int squareWidth = 10;
-        private int squareHight = 10;
+        private int squareWidth = 20;
+        private int squareHight = 20;
         private int count = 0;
         private List<List<bool>> mainLists = new List<List<bool>>();
 
         public Form1()
         {
             InitializeComponent();
-
-            // 初期値を入れる
-            mainLists.Add(new List<bool> { false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, true, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false });
-
+            InitLists();
             ImageCreater();
             this.ImageUpdateTimer.Start();
 
         }
 
+        private void InitLists()
+        {
+            // 初期値を入れる
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, true, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+        }
+
         private Bitmap ImageCreater()
         {
-            this.updateBmp = new Bitmap(100, 100);
+            // x, y
+            this.updateBmp = new Bitmap(squareWidth * mainLists[0].Count, squareHight * mainLists.Count);
 
             Graphics g = Graphics.FromImage(updateBmp);
 
@@ -49,13 +62,13 @@ namespace LifeGame
             {
                 for (int j = 0; j < mainLists[i].Count; j++)
                 {
-                    if (!mainLists[i][j] )
+                    if (!mainLists[i][j])
                     {
-                        g.FillRectangle(Brushes.Black, 10 * i, 10 * j, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.Black, squareHight * j, squareWidth * i, squareWidth, squareHight);
                     }
                     else
                     {
-                        g.FillRectangle(Brushes.White, 10 * i, 10 * j, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.White, squareHight * j, squareWidth * i, squareWidth, squareHight);
                     }
                 }
             }
