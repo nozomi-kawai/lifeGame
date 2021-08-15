@@ -49,7 +49,8 @@ namespace LifeGame
         private Bitmap ImageCreater()
         {
             // x, y
-            this.updateBmp = new Bitmap(squareWidth * mainLists[0].Count, squareHight * mainLists.Count);
+            //this.updateBmp = new Bitmap(squareWidth * mainLists[0].Count, squareHight * mainLists.Count);
+            this.updateBmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             Graphics g = Graphics.FromImage(updateBmp);
 
@@ -62,11 +63,11 @@ namespace LifeGame
                 {
                     if (!mainLists[i][j])
                     {
-                        g.FillRectangle(Brushes.Black, squareHight * j, squareWidth * i, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.Black, squareWidth * j, squareHight * i, squareWidth, squareHight);
                     }
                     else
                     {
-                        g.FillRectangle(Brushes.White, squareHight * j, squareWidth * i, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.White, squareWidth * j, squareHight * i, squareWidth, squareHight);
                     }
                 }
             }
@@ -75,16 +76,104 @@ namespace LifeGame
 
         private List<List<bool>> ListCreater()
         {
-            var nextList = new List<List<bool>>();
+            var nextList = mainLists;
 
+            // 四隅のセルについての処理
+            // 一行目のセル
+            //if (mainLists[0])
+            {
+                // 右上のセル
+                if (mainLists[0][0])
+                {
+                    var rtCells = new List <bool>{ mainLists[0][mainLists[0].Count + 1], mainLists[0 + 1][mainLists[0].Count + 1], mainLists[0 + 1][mainLists[0].Count] };
+                    var rtCellsBool  = rtCells.Where(x => x == true).ToList().Count;
+                    nextList[0][0] = CellJudgement(rtCellsBool);
+                }
+                // 左上のセル
+                if (mainLists[0][mainLists[0].Count])
+                {
+                    var ltCells = new List<bool> { mainLists[0][mainLists[0].Count - 1], mainLists[0 + 1][mainLists[0].Count - 1], mainLists[+1][mainLists[0].Count] };
+                    var ltCellsBool = ltCells.Where(x => x == true).ToList().Count;
+                    nextList[0][mainLists[0].Count] = CellJudgement(ltCellsBool);
+                }
+            }
+            // 最後の行のセル
+            //if (mainLists[mainLists.Count])
+            {
+                // 右下のセル
+                if (mainLists[mainLists.Count][0])
+                {
+                    var rbCells = new List<bool> { mainLists[mainLists.Count - 1][0], mainLists[mainLists.Count - 1][0 + 1], mainLists[mainLists.Count][0 + 1] };
+                    var rbCellsBool = rbCells.Where(x => x == true).ToList().Count;
+                    nextList[0][0] = CellJudgement(rbCellsBool);
+                }
+                // 右上のセル
+                if (mainLists[mainLists.Count][mainLists[mainLists.Count].Count])
+                {
+                    var lbCells = new List<bool> { mainLists[mainLists.Count][mainLists[mainLists.Count].Count - 1] && !mainLists[mainLists.Count - 1][mainLists[mainLists.Count].Count - 1] && !mainLists[mainLists.Count - 1][mainLists[mainLists.Count].Count] };
+                    var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
+                    nextList[0][0] = CellJudgement(lbCellsBool);
+                }
+            }
 
+            // 外側のセルについて
+            for (int i = 1; i < mainLists.Count; i++)
+            {
+                // 一行目のセルについての処理
+                if (mainLists[i][0])
+                {
+                    if (mainLists[i - 1][mainLists.Count] && mainLists[i - 1][mainLists.Count + 1] && mainLists[i][mainLists.Count + 1] && mainLists[i + 1][mainLists.Count + 1] && mainLists[i + 1][mainLists.Count])
+                    {
+                        nextList[i][0] = true;
+                    }
+                }
+                // 最後の行のセルについての処理
+                // 最初の列のセルについての処理
+                // 最後の列のセルについての処理
+            }
 
+            // 内側のセルについての処理
+            for (int i = 1; i<mainLists.Count - 1; i++)
+            {
+                for (int j = 1; j<mainLists[i].Count -1; j++)
+                {
+                    if (!mainLists[i][j])
+                    {
 
-
+                    }
+                    else
+                    {
+                    }
+                }
+            }
             return nextList;
         }
+    
+        private bool CellJudgement(int cellsBool)
+        {
+            // 誕生
+            if (cellsBool == 0)
+            {
+                return true;
+            }
+            // 過疎
+            else if (cellsBool == 1)
+            {
+                return false;
+            }
+            // 生存
+            else if (cellsBool == 2 || cellsBool == 3)
+            {
+                return true;
+            }
+            // 過密
+            else
+            {
+                return false;
+            }
+        }
 
-        private void ImageUpdateTimer_Tick(object sender, EventArgs e)
+private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
             displayBmp = ImageCreater();
             this.pictureBox1.Image = this.displayBmp;
