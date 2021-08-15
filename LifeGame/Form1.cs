@@ -15,14 +15,26 @@ namespace LifeGame
     {
         private Bitmap displayBmp;
         private Bitmap updateBmp;
+        private int squareWidth = 10;
+        private int squareHight = 10;
         private int count = 0;
-        private List<List<bool>> mainList = new List<List<bool>>();
+        private List<List<bool>> mainLists = new List<List<bool>>();
 
         public Form1()
         {
             InitializeComponent();
+
+            // 初期値を入れる
+            mainLists.Add(new List<bool> { false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, true, false, false });
+            mainLists.Add(new List<bool> { false, false, true, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false });
+
             ImageCreater();
             this.ImageUpdateTimer.Start();
+
         }
 
         private Bitmap ImageCreater()
@@ -31,13 +43,13 @@ namespace LifeGame
 
             Graphics g = Graphics.FromImage(updateBmp);
 
-            if ( count % 2 == 0 )
+            if (count % 2 == 0)
             {
-                g.FillRectangle(Brushes.Black, 10, 10, updateBmp.Width - 90, updateBmp.Height - 90);
+                g.FillRectangle(Brushes.Black, 10, 10, squareWidth, squareHight);
             }
             else
             {
-                g.FillRectangle(Brushes.White, 10, 20, updateBmp.Width - 90, updateBmp.Height - 90);
+                g.FillRectangle(Brushes.White, 10, 20, squareWidth, squareHight);
             }
 
             this.count++;
