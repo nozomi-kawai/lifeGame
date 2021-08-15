@@ -42,15 +42,23 @@ namespace LifeGame
 
             Graphics g = Graphics.FromImage(updateBmp);
 
-            if (count % 2 == 0)
-            {
-                g.FillRectangle(Brushes.Black, 10, 10, squareWidth, squareHight);
-            }
-            else
-            {
-                g.FillRectangle(Brushes.White, 10, 20, squareWidth, squareHight);
-            }
+            //// 要素へのアクセスの仕方
+            //Console.WriteLine(mainLists[2][2]);
 
+            for (int i = 0; i < mainLists.Count; i++)
+            {
+                for (int j = 0; j < mainLists[i].Count; j++)
+                {
+                    if (!mainLists[i][j] )
+                    {
+                        g.FillRectangle(Brushes.Black, 10 * i, 10 * j, squareWidth, squareHight);
+                    }
+                    else
+                    {
+                        g.FillRectangle(Brushes.White, 10 * i, 10 * j, squareWidth, squareHight);
+                    }
+                }
+            }
             this.count++;
             return updateBmp;
         }
