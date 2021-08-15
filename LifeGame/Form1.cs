@@ -15,6 +15,7 @@ namespace LifeGame
     {
         private Bitmap bmpUpdate;
         private int count = 0;
+        private List<List<bool>> mainList = new List<List<bool>>();
 
         public Form1()
         {
@@ -25,30 +26,28 @@ namespace LifeGame
 
         private void ImageCreater()
         {
-            this.bmpUpdate = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            this.bmpUpdate = new Bitmap(100, 100);
 
             Graphics g = Graphics.FromImage(bmpUpdate);
 
-            if (this.count % 3 == 0)
+            if ( count % 2 == 0 )
             {
-                g.FillRectangle(Brushes.White, 10, 20, bmpUpdate.Width - 20, bmpUpdate.Height - 40);
-            }
-            else if (this.count % 3 == 1)
-            {
-                g.FillRectangle(Brushes.Blue, 10, 20, bmpUpdate.Width - 20, bmpUpdate.Height - 40);
-            }
-            else if (this.count % 3 == 2)
-            {
-                g.FillRectangle(Brushes.Pink, 10, 20, bmpUpdate.Width - 20, bmpUpdate.Height - 40);
+                g.FillRectangle(Brushes.Black, 10, 10, bmpUpdate.Width - 90, bmpUpdate.Height - 90);
             }
             else
             {
-                g.FillRectangle(Brushes.Black, 10, 20, bmpUpdate.Width - 20, bmpUpdate.Height - 40);
+                g.FillRectangle(Brushes.White, 10, 20, bmpUpdate.Width - 90, bmpUpdate.Height - 90);
             }
 
             this.pictureBox1.Image = this.bmpUpdate;
             this.count++;
 
+        }
+
+        private List<List<bool>> ListCreater()
+        {
+            var retList = new List<List<bool>>();
+            return retList;
         }
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
