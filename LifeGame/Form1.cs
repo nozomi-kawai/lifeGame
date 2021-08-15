@@ -37,7 +37,7 @@ namespace LifeGame
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, true, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
@@ -133,20 +133,16 @@ namespace LifeGame
             //    // 最後の列のセルについての処理
             //}
 
-            //// 内側のセルについての処理
-            //for (int i = 1; i<mainLists.Count - 1; i++)
-            //{
-            //    for (int j = 1; j<mainLists[i].Count -1; j++)
-            //    {
-            //        if (!mainLists[i][j])
-            //        {
-
-            //        }
-            //        else
-            //        {
-            //        }
-            //    }
-            //}
+            // 内側のセルについての処理
+            for (int i = 1; i < mainLists.Count - 1 - 1; i++)
+            {
+                for (int j = 1; j < mainLists[i].Count - 1 - 1; j++)
+                {
+                    var ijCells = new List<bool> { mainLists[i - 1][mainLists[j - 1].Count - 1 - 1], mainLists[i][j - 1], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i - 1][j - 1], };
+                    var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
+                    nextList[i][j] = CellJudgement(mainLists[i][j], ijCellsBool);
+                }
+            }
             return nextList;
         }
     
