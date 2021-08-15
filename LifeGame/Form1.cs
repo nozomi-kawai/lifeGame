@@ -25,12 +25,11 @@ namespace LifeGame
             InitializeComponent();
 
             // 初期値を入れる
-            mainLists.Add(new List<bool> { false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, true, false, false });
-            mainLists.Add(new List<bool> { false, false, true, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, true, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false });
 
             ImageCreater();
             this.ImageUpdateTimer.Start();
