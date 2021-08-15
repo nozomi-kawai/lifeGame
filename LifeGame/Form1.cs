@@ -17,7 +17,6 @@ namespace LifeGame
         private Bitmap updateBmp;
         private int squareWidth = 20;
         private int squareHight = 20;
-        private int count = 0;
         private List<List<bool>> mainLists = new List<List<bool>>();
 
         public Form1()
@@ -26,7 +25,6 @@ namespace LifeGame
             InitLists();
             ImageCreater();
             this.ImageUpdateTimer.Start();
-
         }
 
         private void InitLists()
@@ -72,14 +70,18 @@ namespace LifeGame
                     }
                 }
             }
-            this.count++;
             return updateBmp;
         }
 
         private List<List<bool>> ListCreater()
         {
-            var retList = new List<List<bool>>();
-            return retList;
+            var nextList = new List<List<bool>>();
+
+
+
+
+
+            return nextList;
         }
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
