@@ -162,7 +162,7 @@ namespace LifeGame
             {
                 for (int j = 1; j < mainLists[i].Count - 1 - 1; j++)
                 {
-                    var ijCells = new List<bool> { mainLists[i - 1][mainLists[j - 1].Count - 1 - 1], mainLists[i][j - 1], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i - 1][j - 1] };
+                    var ijCells = new List<bool> { mainLists[i - 1][j - 1], mainLists[i - 1][j], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i][j - 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
                     nextList[i][j] = CellJudgement(mainLists[i][j], ijCellsBool);
                 }
@@ -191,8 +191,7 @@ namespace LifeGame
                 {
                     return true;
                 }
-                // 過疎
-                // 過密
+                // 過疎 || 過密
                 else if (cellsBool <= 1 || cellsBool >= 4)
                 {
                     return false;
