@@ -33,11 +33,11 @@ namespace LifeGame
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { true, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, true, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
@@ -174,7 +174,7 @@ namespace LifeGame
             if (!myselfBool)
             {
                 // 誕生
-                if (cellsBool == 0)
+                if (cellsBool == 3)
                 {
                     return true;
                 }
