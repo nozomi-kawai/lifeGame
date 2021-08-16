@@ -152,8 +152,8 @@ namespace LifeGame
                 //if (mainLists[i][mainLists[i].Count - 1])
                 {
                     var rightColumnCells = new List<bool> { mainLists[i - 1][mainLists[i - 1].Count - 1], mainLists[i - 1][mainLists[i - 1].Count - 1 - 1], mainLists[i][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1] };
-                    var lrightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
-                    nextList[i][0] = CellJudgement(mainLists[i][0], lrightColumnCellsBool);
+                    var rightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
+                    nextList[i][0] = CellJudgement(mainLists[i][0], rightColumnCellsBool);
                 }
             }
 
