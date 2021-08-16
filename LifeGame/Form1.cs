@@ -23,7 +23,8 @@ namespace LifeGame
         {
             InitializeComponent();
             InitLists();
-            ImageCreater();
+            displayBmp = ImageCreater();
+            this.pictureBox1.Image = this.displayBmp;
             this.ImageUpdateTimer.Start();
         }
 
@@ -33,8 +34,8 @@ namespace LifeGame
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, true, true, true, false, false, false, false, false, false, false, false });
+            mainLists.Add(new List<bool> { false, false, false, false, true, true, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
