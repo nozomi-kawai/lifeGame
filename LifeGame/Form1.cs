@@ -118,28 +118,50 @@ namespace LifeGame
                 }
             }
 
-            //// 外側のセルについて
-            //for (int i = 1; i < mainLists.Count; i++)
-            //{
-            //    // 一行目のセルについての処理
-            //    if (mainLists[i][0])
-            //    {
-            //        if (mainLists[i - 1][mainLists.Count] && mainLists[i - 1][mainLists.Count + 1] && mainLists[i][mainLists.Count + 1] && mainLists[i + 1][mainLists.Count + 1] && mainLists[i + 1][mainLists.Count])
-            //        {
-            //            nextList[i][0] = true;
-            //        }
-            //    }
-            //    // 最後の行のセルについての処理
-            //    // 最初の列のセルについての処理
-            //    // 最後の列のセルについての処理
-            //}
+            // 外側のセルについて
+            // 外側の行のセルについての処理
+            for (int j = 1; j < mainLists[0].Count - 1 - 1; j++)
+            {
+                // 一行目のセルについての処理
+                //if (mainLists[0][j])
+                {
+                    var topRowCells = new List<bool>{ mainLists[0][j - 1], mainLists[0 + 1][j - 1], mainLists[0 + 1][j], mainLists[0 + 1][j + 1], mainLists[0][j + 1] };
+                    var topRowCellsBool = topRowCells.Where(x => x == true).ToList().Count;
+                    nextList[0][j] = CellJudgement(mainLists[0][j], topRowCellsBool);
+                }
+                // 最後の行のセルについての処理
+                //if (mainLists[(mainLists.Count -1][j])
+                {
+                    var bottomRowCells = new List<bool> { mainLists[mainLists.Count - 1][j - 1], mainLists[mainLists.Count - 1 -1][j - 1], mainLists[mainLists.Count - 1 - 1][j], mainLists[mainLists.Count - 1 - 1][j + 1], mainLists[mainLists.Count - 1][j + 1] };
+                    var bottomRowCellsBool = bottomRowCells.Where(x => x == true).ToList().Count;
+                    nextList[mainLists.Count - 1][j] = CellJudgement(mainLists[mainLists.Count - 1][j], bottomRowCellsBool);
+                }
+            }
+            // 外側の列のセルのついての処理
+            for (int i = 1; i < mainLists.Count - 1 - 1; i++)
+            {
+                // 最初の列のセルについての処理
+                //if (mainLists[i][0])
+                {
+                    var leftColumnCells = new List<bool> { mainLists[i - 1][0], mainLists[i - 1][0 + 1], mainLists[i][0 + 1], mainLists[i + 1][0 + 1], mainLists[i + 1][0] };
+                    var leftColumnCellsBool = leftColumnCells.Where(x => x == true).ToList().Count;
+                    nextList[i][0] = CellJudgement(mainLists[i][0], leftColumnCellsBool);
+                }
+                // 最後の列のセルについての処理
+                //if (mainLists[i][mainLists[i].Count - 1])
+                {
+                    var rightColumnCells = new List<bool> { mainLists[i - 1][mainLists[i - 1].Count - 1], mainLists[i - 1][mainLists[i - 1].Count - 1 - 1], mainLists[i][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1] };
+                    var lrightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
+                    nextList[i][0] = CellJudgement(mainLists[i][0], lrightColumnCellsBool);
+                }
+            }
 
             // 内側のセルについての処理
             for (int i = 1; i < mainLists.Count - 1 - 1; i++)
             {
                 for (int j = 1; j < mainLists[i].Count - 1 - 1; j++)
                 {
-                    var ijCells = new List<bool> { mainLists[i - 1][mainLists[j - 1].Count - 1 - 1], mainLists[i][j - 1], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i - 1][j - 1], };
+                    var ijCells = new List<bool> { mainLists[i - 1][mainLists[j - 1].Count - 1 - 1], mainLists[i][j - 1], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i - 1][j - 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
                     nextList[i][j] = CellJudgement(mainLists[i][j], ijCellsBool);
                 }
