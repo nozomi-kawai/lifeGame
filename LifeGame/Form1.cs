@@ -206,11 +206,7 @@ namespace LifeGame
                     return true;
                 }
                 // 過疎 || 過密
-                else if (cellsBool <= 1 || cellsBool >= 4)
-                {
-                    return false;
-                }
-                else
+                else  // if (cellsBool <= 1 || cellsBool >= 4)
                 {
                     return false;
                 }
