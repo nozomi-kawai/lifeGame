@@ -132,14 +132,16 @@ namespace LifeGame
                 // 一行目のセルについての処理
                 //if (mainLists[0][j])
                 {
-                    var topRowCells = new List<bool>{ mainLists[0][j - 1], mainLists[0 + 1][j - 1], mainLists[0 + 1][j], mainLists[0 + 1][j + 1], mainLists[0][j + 1] };
+                    var topRowCells = new List<bool>{ mainLists[0][j - 1],                          mainLists[0][j + 1],
+                                                      mainLists[0 + 1][j - 1], mainLists[0 + 1][j], mainLists[0 + 1][j + 1] };
                     var topRowCellsBool = topRowCells.Where(x => x == true).ToList().Count;
                     nextList[0][j] = CellJudgement(mainLists[0][j], topRowCellsBool);
                 }
                 // 最後の行のセルについての処理
                 //if (mainLists[(mainLists.Count -1][j])
                 {
-                    var bottomRowCells = new List<bool> { mainLists[mainLists.Count - 1][j - 1], mainLists[mainLists.Count - 1 -1][j - 1], mainLists[mainLists.Count - 1 - 1][j], mainLists[mainLists.Count - 1 - 1][j + 1], mainLists[mainLists.Count - 1][j + 1] };
+                    var bottomRowCells = new List<bool> { mainLists[mainLists.Count - 1 -1][j - 1], mainLists[mainLists.Count - 1 - 1][j], mainLists[mainLists.Count - 1 - 1][j + 1],
+                                                          mainLists[mainLists.Count - 1][j - 1],                                           mainLists[mainLists.Count - 1][j + 1] };
                     var bottomRowCellsBool = bottomRowCells.Where(x => x == true).ToList().Count;
                     nextList[mainLists.Count - 1][j] = CellJudgement(mainLists[mainLists.Count - 1][j], bottomRowCellsBool);
                 }
@@ -150,14 +152,18 @@ namespace LifeGame
                 // 最初の列のセルについての処理
                 //if (mainLists[i][0])
                 {
-                    var leftColumnCells = new List<bool> { mainLists[i - 1][0], mainLists[i - 1][0 + 1], mainLists[i][0 + 1], mainLists[i + 1][0 + 1], mainLists[i + 1][0] };
+                    var leftColumnCells = new List<bool> { mainLists[i - 1][0], mainLists[i - 1][0 + 1],
+                                                                                mainLists[i][0 + 1],
+                                                           mainLists[i + 1][0], mainLists[i + 1][0 + 1]};
                     var leftColumnCellsBool = leftColumnCells.Where(x => x == true).ToList().Count;
                     nextList[i][0] = CellJudgement(mainLists[i][0], leftColumnCellsBool);
                 }
                 // 最後の列のセルについての処理
                 //if (mainLists[i][mainLists[i].Count - 1])
                 {
-                    var rightColumnCells = new List<bool> { mainLists[i - 1][mainLists[i - 1].Count - 1], mainLists[i - 1][mainLists[i - 1].Count - 1 - 1], mainLists[i][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1 - 1], mainLists[i + 1][mainLists[i].Count - 1] };
+                    var rightColumnCells = new List<bool> { mainLists[i - 1][mainLists[i - 1].Count - 1 - 1], mainLists[i - 1][mainLists[i - 1].Count - 1],
+                                                            mainLists[i][mainLists[i].Count - 1 - 1],
+                                                            mainLists[i + 1][mainLists[i + 1].Count - 1 - 1], mainLists[i + 1][mainLists[i + 1].Count - 1] };
                     var rightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
                     nextList[i][0] = CellJudgement(mainLists[i][0], rightColumnCellsBool);
                 }
@@ -168,7 +174,9 @@ namespace LifeGame
             {
                 for (int j = 1; j < mainLists[i].Count - 1 - 1; j++)
                 {
-                    var ijCells = new List<bool> { mainLists[i - 1][j - 1], mainLists[i - 1][j], mainLists[i - 1][j + 1], mainLists[i][j + 1], mainLists[i + 1][j + 1], mainLists[i + 1][j], mainLists[i + 1][j - 1], mainLists[i][j - 1] };
+                    var ijCells = new List<bool> { mainLists[i - 1][j - 1], mainLists[i - 1][j],     mainLists[i - 1][j + 1],
+                                                   mainLists[i][j - 1],                              mainLists[i][j + 1],
+                                                   mainLists[i + 1][j - 1], mainLists[i + 1][j],     mainLists[i + 1][j + 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
                     nextList[i][j] = CellJudgement(mainLists[i][j], ijCellsBool);
                 }
