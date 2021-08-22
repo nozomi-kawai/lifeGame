@@ -14,16 +14,21 @@ namespace LifeGame
     public partial class Form1 : Form
     {
         private Bitmap displayBmp;
-        private Bitmap updateBmp;
+        private Bitmap updateBmpA;
+        private Bitmap updateBmpB;
         private int squareWidth = 20;
         private int squareHight = 20;
+        private int imageCellWidth = 20;
+        private int imageCellHight = 20;
         private List<List<bool>> mainLists = new List<List<bool>>();
 
         public Form1()
         {
             InitializeComponent();
             InitLists();
-            displayBmp = ImageCreater();
+            this.updateBmpA = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            this.updateBmpB = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            displayBmp = ImageCreater(this.updateBmpA);
             this.pictureBox1.Image = this.displayBmp;
             this.ImageUpdateTimer.Start();
         }
@@ -53,11 +58,8 @@ namespace LifeGame
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
         }
 
-        private Bitmap ImageCreater()
+        private Bitmap ImageCreater(Bitmap updateBmp)
         {
-            // x, y
-            //this.updateBmp = new Bitmap(squareWidth * mainLists[0].Count, squareHight * mainLists.Count);
-            this.updateBmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             Graphics g = Graphics.FromImage(updateBmp);
 
@@ -83,7 +85,11 @@ namespace LifeGame
 
         private List<List<bool>> ListCreater()
         {
-            var nextList = mainLists;
+            List<List<bool>> nextList = new List<List<bool>>();
+            foreach (var item in mainLists)
+            {
+                nextList.Add(item);
+            }
 
             // 四隅のセルについての処理
             {
@@ -215,9 +221,16 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            mainLists = ListCreater();
-            displayBmp = ImageCreater();
+            this.mainLists = ListCreater();
             this.pictureBox1.Image = this.displayBmp;
+            if (this.pictureBox1.Image == this.updateBmpA)
+            {
+                displayBmp = ImageCreater(this.updateBmpB);
+            }
+            else
+            {
+                displayBmp = ImageCreater(this.updateBmpA);
+            }
         }
     }
 }
