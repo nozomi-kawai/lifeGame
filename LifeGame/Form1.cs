@@ -85,10 +85,11 @@ namespace LifeGame
 
         private List<List<bool>> ListCreater()
         {
-            List<List<bool>> nextList = new List<List<bool>>();
-            foreach (var item in mainLists)
+            List<List<bool>> nextList = new List<List<bool>>(mainLists.Count);
+            for (int i = 0; i < mainLists.Count; i++)
             {
-                nextList.Add(item);
+                var row = Enumerable.Range(0, mainLists.Count).Select(x => false).ToList();
+                nextList.Add(row);
             }
 
             // 四隅のセルについての処理
