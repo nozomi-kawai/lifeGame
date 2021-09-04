@@ -155,9 +155,13 @@ namespace LifeGame
             return nextList;
         }
 
+        /// <summary>
+        /// 外側のセルについての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateOutsideCell(List<List<bool>> nextList)
         {
-            // 外側のセルについて
             // 外側の行のセルについての処理
             for (int j = 1; j < mainLists[0].Count - 1 - 1; j++)
             {
@@ -203,9 +207,13 @@ namespace LifeGame
             return nextList;
         }
 
+        /// <summary>
+        /// 内側のセルについての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateCenterCell(List<List<bool>> nextList)
         {
-            // 内側のセルについての処理
             for (int i = 1; i < mainLists.Count - 1 - 1; i++)
             {
                 for (int j = 1; j < mainLists[i].Count - 1 - 1; j++)
