@@ -106,13 +106,12 @@ namespace LifeGame
         }
 
         /// <summary>
-        /// 四隅のセルについての処理
+        /// 一行目の四隅のセルについての処理
         /// </summary>
         /// <param name="nextList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateCornerCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateTopRowCornerCell(List<List<bool>> nextList)
         {
-            // 一行目のセル
             // if (mainLists[0])
             {
                 // 左上のセル
@@ -132,7 +131,16 @@ namespace LifeGame
                     nextList[0][mainLists[0 + 1].Count - 1] = JudgementCell(mainLists[0][mainLists[0 + 1].Count - 1], rtCellsBool);
                 }
             }
-            // 最後の行のセル
+            return nextList;
+        }
+
+        /// <summary>
+        /// 最後の行の四隅のセルについての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
+        private List<List<bool>> CreateBottomRowCornerCell(List<List<bool>> nextList)
+        {
             // if (mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1])
             {
                 // 右下のセル
@@ -156,13 +164,24 @@ namespace LifeGame
         }
 
         /// <summary>
-        /// 外側のセルについての処理
+        /// 四隅のセルについての処理
         /// </summary>
         /// <param name="nextList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateOutsideCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateCornerCell(List<List<bool>> nextList)
         {
-            // 外側の行のセルについての処理
+            nextList = CreateTopRowCornerCell(nextList);
+            nextList = CreateBottomRowCornerCell(nextList);
+            return nextList;
+        }
+
+        /// <summary>
+        /// 外側の行のセルについての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
+        private List<List<bool>> CreateOutsideRowCell(List<List<bool>> nextList)
+        {
             for (int j = 1; j < mainLists[0].Count - 1 - 1; j++)
             {
                 // 一行目のセルについての処理
@@ -182,7 +201,17 @@ namespace LifeGame
                     nextList[mainLists.Count - 1][j] = JudgementCell(mainLists[mainLists.Count - 1][j], bottomRowCellsBool);
                 }
             }
-            // 外側の列のセルのついての処理
+            return nextList;
+        }
+
+        /// <summary>
+        /// 外側の列のセルのついての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
+        private List<List<bool>> CreateOutsideColumnCell(List<List<bool>> nextList)
+        {
+            // 
             for (int i = 1; i < mainLists.Count - 1 - 1; i++)
             {
                 // 最初の列のセルについての処理
@@ -204,6 +233,19 @@ namespace LifeGame
                     nextList[i][0] = JudgementCell(mainLists[i][0], rightColumnCellsBool);
                 }
             }
+            return nextList;
+        }
+
+        /// <summary>
+        /// 外側のセルについての処理
+        /// </summary>
+        /// <param name="nextList">変更するリスト</param>
+        /// <returns>変更済みのリスト</returns>
+        private List<List<bool>> CreateOutsideCell(List<List<bool>> nextList)
+        {
+            nextList = CreateOutsideRowCell(nextList);
+            nextList = CreateOutsideColumnCell(nextList);
+
             return nextList;
         }
 
