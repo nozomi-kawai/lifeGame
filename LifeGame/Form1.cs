@@ -112,10 +112,10 @@ namespace LifeGame
         /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateTopRowCornerCell(List<List<bool>> nextList)
         {
-            // if (mainLists[0])
+            // mainLists[0]
             {
                 // 左上のセル
-                //if (mainLists[0][0])
+                // mainLists[0][0]
                 {
                     var ltCells = new List<bool> {                      mainLists[0][0 + 1],
                                                     mainLists[0 + 1][0], mainLists[0 + 1][0 + 1] };
@@ -123,12 +123,12 @@ namespace LifeGame
                     nextList[0][0] = JudgementCell(mainLists[0][0], ltCellsBool);
                 }
                 // 右上のセル
-                //if (mainLists[0][mainLists[0 + 1].Count - 1])
+                // mainLists[0][mainLists[0].Count - 1]
                 {
                     var rtCells = new List<bool> { mainLists[0][mainLists[0].Count - 1 - 1],
                                                     mainLists[0 + 1][mainLists[0 + 1].Count - 1 - 1], mainLists[0 + 1][mainLists[0 + 1].Count - 1] };
                     var rtCellsBool = rtCells.Where(x => x == true).ToList().Count;
-                    nextList[0][mainLists[0 + 1].Count - 1] = JudgementCell(mainLists[0][mainLists[0 + 1].Count - 1], rtCellsBool);
+                    nextList[0][mainLists[0].Count - 1] = JudgementCell(mainLists[0][mainLists[0].Count - 1], rtCellsBool);
                 }
             }
             return nextList;
@@ -141,23 +141,23 @@ namespace LifeGame
         /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateBottomRowCornerCell(List<List<bool>> nextList)
         {
-            // if (mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1])
+            // mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1]
             {
-                // 右下のセル
-                //    if (mainLists[mainLists.Count -1][mainLists[mainLists.Count -1].Count -1])
-                {
-                    var lbCells = new List<bool> { mainLists[mainLists.Count - 1 - 1][mainLists[mainLists.Count - 1 - 1].Count - 1 - 1], mainLists[mainLists.Count - 1 - 1][mainLists[mainLists.Count - 1 - 1].Count - 1],
-                                                    mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1 -1] };
-                    var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
-                    nextList[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1] = JudgementCell(mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1], lbCellsBool);
-                }
                 // 左下のセル
-                //    if (mainLists[mainLists.Count -1][0])
+                // mainLists[mainLists.Count -1][0]
                 {
-                    var rbCells = new List<bool> { mainLists[mainLists.Count - 1 - 1][0], mainLists[mainLists.Count - 1 - 1][0 + 1],
-                                                                                            mainLists[mainLists.Count - 1][0 + 1] };
-                    var rbCellsBool = rbCells.Where(x => x == true).ToList().Count;
-                    nextList[mainLists.Count - 1][0] = JudgementCell(mainLists[mainLists.Count - 1][0], rbCellsBool);
+                    var lbCells = new List<bool> { mainLists[mainLists.Count - 1 - 1][0], mainLists[mainLists.Count - 1 - 1][0 + 1],
+                                                                                          mainLists[mainLists.Count - 1][0 + 1] };
+                    var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
+                    nextList[mainLists.Count - 1][0] = JudgementCell(mainLists[mainLists.Count - 1][0], lbCellsBool);
+                }
+                // 右下のセル
+                // mainLists[mainLists.Count -1][mainLists[mainLists.Count -1].Count -1]
+                {
+                    var rlbCells = new List<bool> { mainLists[mainLists.Count - 1 - 1][mainLists[mainLists.Count - 1 - 1].Count - 1 - 1], mainLists[mainLists.Count - 1 - 1][mainLists[mainLists.Count - 1 - 1].Count - 1],
+                                                    mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1 - 1] };
+                    var rbCellsBool = rlbCells.Where(x => x == true).ToList().Count;
+                    nextList[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1] = JudgementCell(mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1], rbCellsBool);
                 }
             }
             return nextList;
@@ -185,7 +185,7 @@ namespace LifeGame
             for (int j = 1; j < mainLists[0].Count - 1 - 1; j++)
             {
                 // 一行目のセルについての処理
-                //if (mainLists[0][j])
+                // mainLists[0][j]
                 {
                     var topRowCells = new List<bool>{ mainLists[0][j - 1],                          mainLists[0][j + 1],
                                                       mainLists[0 + 1][j - 1], mainLists[0 + 1][j], mainLists[0 + 1][j + 1] };
@@ -193,7 +193,7 @@ namespace LifeGame
                     nextList[0][j] = JudgementCell(mainLists[0][j], topRowCellsBool);
                 }
                 // 最後の行のセルについての処理
-                //if (mainLists[(mainLists.Count -1][j])
+                // mainLists[(mainLists.Count -1][j]
                 {
                     var bottomRowCells = new List<bool> { mainLists[mainLists.Count - 1 -1][j - 1], mainLists[mainLists.Count - 1 - 1][j], mainLists[mainLists.Count - 1 - 1][j + 1],
                                                           mainLists[mainLists.Count - 1][j - 1],                                           mainLists[mainLists.Count - 1][j + 1] };
@@ -215,7 +215,7 @@ namespace LifeGame
             for (int i = 1; i < mainLists.Count - 1 - 1; i++)
             {
                 // 最初の列のセルについての処理
-                //if (mainLists[i][0])
+                // mainLists[i][0]
                 {
                     var leftColumnCells = new List<bool> { mainLists[i - 1][0], mainLists[i - 1][0 + 1],
                                                                                 mainLists[i][0 + 1],
@@ -224,13 +224,13 @@ namespace LifeGame
                     nextList[i][0] = JudgementCell(mainLists[i][0], leftColumnCellsBool);
                 }
                 // 最後の列のセルについての処理
-                //if (mainLists[i][mainLists[i].Count - 1])
+                // mainLists[i][mainLists[i].Count - 1]
                 {
                     var rightColumnCells = new List<bool> { mainLists[i - 1][mainLists[i - 1].Count - 1 - 1], mainLists[i - 1][mainLists[i - 1].Count - 1],
                                                             mainLists[i][mainLists[i].Count - 1 - 1],
                                                             mainLists[i + 1][mainLists[i + 1].Count - 1 - 1], mainLists[i + 1][mainLists[i + 1].Count - 1] };
                     var rightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
-                    nextList[i][0] = JudgementCell(mainLists[i][0], rightColumnCellsBool);
+                    nextList[i][mainLists[i].Count - 1] = JudgementCell(mainLists[i][mainLists[i].Count - 1], rightColumnCellsBool);
                 }
             }
             return nextList;
