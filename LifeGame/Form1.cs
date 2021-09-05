@@ -61,8 +61,8 @@ namespace LifeGame
         private void InitLists()
         {
             // 初期値を入れる
+            mainLists.Add(new List<bool> { true,  true,  true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { true,  true,  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainLists.Add(new List<bool> { true,  false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false,  false, false, false, false, false, false, false, false, false, false, false, false });
             mainLists.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
