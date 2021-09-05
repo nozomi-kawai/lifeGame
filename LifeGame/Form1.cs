@@ -270,6 +270,10 @@ namespace LifeGame
             return nextList;
         }
 
+        /// <summary>
+        /// 新しいリストを作成して返す
+        /// </summary>
+        /// <returns>作成された新しいリスト</returns>
         private List<List<bool>> CreateList()
         {
             List<List<bool>> nextList = new List<List<bool>>(mainLists.Count);
