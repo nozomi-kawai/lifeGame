@@ -22,14 +22,13 @@ namespace LifeGame
         private int imageCellWidth = 20;
         private int imageCellHight = 20;
         private List<List<bool>> mainList = new List<List<bool>>();
-        private List<List<bool>> nextList = new List<List<bool>>();
         private ListCreater listCreater = new ListCreater();
 
         public Form1()
         {
             InitializeComponent();
             InitLists();
-            listCreater.InitListCreater(mainList, nextList);
+            listCreater.InitListCreater(mainList);
             this.updateBmpA = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             this.updateBmpB = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             displayBmp = CreateImage(this.updateBmpA);
@@ -85,7 +84,7 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            listCreater.CreateList();
+            listCreater.ListChange();
             if (this.pictureBox1.Image == this.updateBmpA)
             {
                 displayBmp = CreateImage(this.updateBmpB);

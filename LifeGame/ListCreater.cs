@@ -9,16 +9,14 @@ namespace LifeGame
     public class ListCreater
     {
         private List<List<bool>> mainList;
-        private List<List<bool>> nextList;
 
         public ListCreater()
         {
             // NOP
         }
 
-        public void InitListCreater(List<List<bool>> mainList_, List<List<bool>> nextList_)
+        public void InitListCreater(List<List<bool>> mainList_)
         {
-            nextList = nextList_;
             mainList = mainList_;
         }
 
@@ -191,7 +189,7 @@ namespace LifeGame
         /// 新しいリストを作成して返す
         /// </summary>
         /// <returns>作成された新しいリスト</returns>
-        public void CreateList()
+        private List<List<bool>> CreateList()
         {
             List<List<bool>> nextList = new List<List<bool>>(mainList.Count);
             for (int i = 0; i < mainList.Count; i++)
@@ -203,6 +201,13 @@ namespace LifeGame
             nextList = CreateCornerCell(nextList);
             nextList = CreateOutsideCell(nextList);
             nextList = CreateCenterCell(nextList);
+
+            return nextList;
+        }
+
+        public void ListChange()
+        {
+            this.mainList = CreateList();
         }
 
         private bool JudgementCell(bool myselfBool, int cellsBool)
