@@ -84,7 +84,7 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            listCreater.ListChange();
+            mainList = listCreater.ListChange();
             if (this.pictureBox1.Image == this.updateBmpA)
             {
                 displayBmp = CreateImage(this.updateBmpB);

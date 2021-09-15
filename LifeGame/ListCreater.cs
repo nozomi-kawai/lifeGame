@@ -17,7 +17,7 @@ namespace LifeGame
 
         public void InitListCreater(List<List<bool>> mainList_)
         {
-            mainList = mainList_;
+            this.mainList = mainList_;
         }
 
         /// <summary>
@@ -205,9 +205,11 @@ namespace LifeGame
             return nextList;
         }
 
-        public void ListChange()
+        public List<List<bool>> ListChange()
         {
             this.mainList = CreateList();
+
+            return this.mainList;
         }
 
         private bool JudgementCell(bool myselfBool, int cellsBool)
