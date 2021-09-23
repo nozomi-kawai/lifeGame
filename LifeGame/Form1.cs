@@ -60,28 +60,6 @@ namespace LifeGame
             mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
             mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
         }
-        private Bitmap CreateImage(Bitmap updateBmp)
-        {
-
-            Graphics g = Graphics.FromImage(updateBmp);
-
-            for (int i = 0; i < mainList.Count; i++)
-            {
-                for (int j = 0; j < mainList[i].Count; j++)
-                {
-                    if (!mainList[i][j])
-                    {
-                        g.FillRectangle(Brushes.Black, squareWidth * j, squareHight * i, squareWidth, squareHight);
-                    }
-                    else
-                    {
-                        g.FillRectangle(Brushes.White, squareWidth * j, squareHight * i, squareWidth, squareHight);
-                    }
-                }
-            }
-            return updateBmp;
-        }
-
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
             mainList = listCreater.ListChange();
