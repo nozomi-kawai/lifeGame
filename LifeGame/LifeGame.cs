@@ -16,7 +16,14 @@ namespace LifeGame
 
         public void InitListCreater(List<List<bool>> mainList_)
         {
-            this.displayList = mainList_;
+            this.updateList = mainList_;
+        }
+
+        private void InitLists()
+        {
+            // 初期値を入れる
+            var listRow = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }
+            updateList.Add(listRow);
         }
 
         /// <summary>
@@ -31,7 +38,7 @@ namespace LifeGame
                 // 左上のセル
                 // mainLists[0][0]
                 {
-                    var ltCells = new List<bool> {                      displayList[0][0 + 1],
+                    var ltCells = new List<bool> {                         displayList[0][0 + 1],
                                                     displayList[0 + 1][0], displayList[0 + 1][0 + 1] };
                     var ltCellsBool = ltCells.Where(x => x == true).ToList().Count;
                     nextList[0][0] = JudgementCell(displayList[0][0], ltCellsBool);
@@ -61,7 +68,7 @@ namespace LifeGame
                 // mainLists[mainLists.Count -1][0]
                 {
                     var lbCells = new List<bool> { displayList[displayList.Count - 1 - 1][0], displayList[displayList.Count - 1 - 1][0 + 1],
-                                                                                          displayList[displayList.Count - 1][0 + 1] };
+                                                                                              displayList[displayList.Count - 1][0 + 1] };
                     var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
                     nextList[displayList.Count - 1][0] = JudgementCell(displayList[displayList.Count - 1][0], lbCellsBool);
                 }
@@ -101,7 +108,7 @@ namespace LifeGame
                 // 一行目のセルについての処理
                 // mainLists[0][j]
                 {
-                    var topRowCells = new List<bool>{ displayList[0][j - 1],                          displayList[0][j + 1],
+                    var topRowCells = new List<bool>{ displayList[0][j - 1],                            displayList[0][j + 1],
                                                       displayList[0 + 1][j - 1], displayList[0 + 1][j], displayList[0 + 1][j + 1] };
                     var topRowCellsBool = topRowCells.Where(x => x == true).ToList().Count;
                     nextList[0][j] = JudgementCell(displayList[0][j], topRowCellsBool);
@@ -110,7 +117,7 @@ namespace LifeGame
                 // mainLists[(mainLists.Count -1][j]
                 {
                     var bottomRowCells = new List<bool> { displayList[displayList.Count - 1 -1][j - 1], displayList[displayList.Count - 1 - 1][j], displayList[displayList.Count - 1 - 1][j + 1],
-                                                          displayList[displayList.Count - 1][j - 1],                                           displayList[displayList.Count - 1][j + 1] };
+                                                          displayList[displayList.Count - 1][j - 1],                                               displayList[displayList.Count - 1][j + 1] };
                     var bottomRowCellsBool = bottomRowCells.Where(x => x == true).ToList().Count;
                     nextList[displayList.Count - 1][j] = JudgementCell(displayList[displayList.Count - 1][j], bottomRowCellsBool);
                 }
@@ -132,7 +139,7 @@ namespace LifeGame
                 // mainLists[i][0]
                 {
                     var leftColumnCells = new List<bool> { displayList[i - 1][0], displayList[i - 1][0 + 1],
-                                                                                displayList[i][0 + 1],
+                                                                                  displayList[i][0 + 1],
                                                            displayList[i + 1][0], displayList[i + 1][0 + 1]};
                     var leftColumnCellsBool = leftColumnCells.Where(x => x == true).ToList().Count;
                     nextList[i][0] = JudgementCell(displayList[i][0], leftColumnCellsBool);
@@ -174,9 +181,9 @@ namespace LifeGame
             {
                 for (int j = 1; j < displayList[i].Count - 1 - 1; j++)
                 {
-                    var ijCells = new List<bool> { displayList[i - 1][j - 1], displayList[i - 1][j],     displayList[i - 1][j + 1],
-                                                   displayList[i][j - 1],                              displayList[i][j + 1],
-                                                   displayList[i + 1][j - 1], displayList[i + 1][j],     displayList[i + 1][j + 1] };
+                    var ijCells = new List<bool> { displayList[i - 1][j - 1], displayList[i - 1][j], displayList[i - 1][j + 1],
+                                                   displayList[i][j - 1],                            displayList[i][j + 1],
+                                                   displayList[i + 1][j - 1], displayList[i + 1][j], displayList[i + 1][j + 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
                     nextList[i][j] = JudgementCell(displayList[i][j], ijCellsBool);
                 }

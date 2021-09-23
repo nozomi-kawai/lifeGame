@@ -36,30 +36,6 @@ namespace LifeGame
             this.ImageUpdateTimer.Start();
         }
 
-        private void InitLists()
-        {
-            // 初期値を入れる
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            mainList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-        }
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
             mainList = listCreater.ListChange();
