@@ -34,15 +34,6 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            // TODO: 表示する画像を切り替える
-            if (this.pictureBox1.Image == this.updateBmpA)
-            {
-                displayBmp = CreateImage(this.updateBmpB);
-            }
-            else
-            {
-                displayBmp = CreateImage(this.updateBmpA);
-            }
             this.pictureBox1.Image = this.displayBmp;
         }
     }

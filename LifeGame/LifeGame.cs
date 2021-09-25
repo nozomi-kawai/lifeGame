@@ -12,7 +12,8 @@ namespace LifeGame
         private List<List<bool>> displayList;
         private List<List<bool>> updateList;
         private Bitmap displayBmp;
-        private Bitmap updateBmp;
+        private Bitmap updateBmpA;
+        private Bitmap updateBmpB;
 
         public void InitListCreater(List<List<bool>> mainList_)
         {
@@ -191,33 +192,6 @@ namespace LifeGame
             return nextList;
         }
 
-        /// <summary>
-        /// 新しいリストを作成して返す
-        /// </summary>
-        /// <returns>作成された新しいリスト</returns>
-        private List<List<bool>> CreateList()
-        {
-            List<List<bool>> nextList = new List<List<bool>>(displayList.Count);
-            for (int i = 0; i < displayList.Count; i++)
-            {
-                var row = Enumerable.Range(0, displayList.Count).Select(x => false).ToList();
-                nextList.Add(row);
-            }
-
-            nextList = CreateCornerCell(nextList);
-            nextList = CreateOutsideCell(nextList);
-            nextList = CreateCenterCell(nextList);
-
-            return nextList;
-        }
-
-        public List<List<bool>> ListChange()
-        {
-            this.displayList = CreateList();
-
-            return this.displayList;
-        }
-
         private bool JudgementCell(bool myselfBool, int cellsBool)
         {
             if (!myselfBool)
@@ -269,13 +243,47 @@ namespace LifeGame
             return updateBmp;
         }
 
-        public Bitmap nextDisplay()
+        /// <summary>
+        /// 新しいリストを作成して返す
+        /// </summary>
+        /// <returns>作成された新しいリスト</returns>
+        private List<List<bool>> CreateList()
         {
-            // TODO: 次の世代に進める
-            // TODO: 画像を作成する
-            return this.displayBmp;
+            List<List<bool>> nextList = new List<List<bool>>(mainList.Count);
+            for (int i = 0; i < mainList.Count; i++)
+            {
+                var row = Enumerable.Range(0, mainList.Count).Select(x => false).ToList();
+                nextList.Add(row);
+            }
+
+            nextList = CreateCornerCell(nextList);
+            nextList = CreateOutsideCell(nextList);
+            nextList = CreateCenterCell(nextList);
+
+            return nextList;
         }
 
+
+
+        public Bitmap displayNext()
+        {
+            // TODO: そもそも更新かけるbmpを切り替えてから更新の関数に引数で渡すようにするか？
+
+            // リストを更新する
+            this.updateList = this.CreateList();
+            // 画像を更新する
+            // 表示する画像を切り替える
+            if (this.displayBmp == this.updateBmpA)
+            {
+                displayBmp = CreateImage(this.updateBmpB);
+            }
+            else
+            {
+                displayBmp = CreateImage(this.updateBmpA);
+            }
+
+            return this.displayBmp;
+        }
     }
 }
 }
