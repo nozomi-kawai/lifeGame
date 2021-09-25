@@ -14,31 +14,27 @@ namespace LifeGame
 {
     public partial class Form1 : Form
     {
+        // 表示する画像
         private Bitmap displayBmp;
-        private Bitmap updateBmpA;
-        private Bitmap updateBmpB;
+        // セルのサイズ
         private int squareWidth = 20;
         private int squareHight = 20;
+        // セルの数
         private int imageCellWidth = 20;
         private int imageCellHight = 20;
+        // 画像を作成するためのリスト
         private List<List<bool>> mainList = new List<List<bool>>();
-        private ListCreater listCreater = new ListCreater();
 
         public Form1()
-        {
+        {           
             InitializeComponent();
-            InitLists();
-            listCreater.InitListCreater(mainList);
-            this.updateBmpA = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            this.updateBmpB = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            displayBmp = CreateImage(this.updateBmpA);
-            this.pictureBox1.Image = this.displayBmp;
+            // タイマースタート
             this.ImageUpdateTimer.Start();
         }
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            mainList = listCreater.ListChange();
+            // TODO: 表示する画像を切り替える
             if (this.pictureBox1.Image == this.updateBmpA)
             {
                 displayBmp = CreateImage(this.updateBmpB);
