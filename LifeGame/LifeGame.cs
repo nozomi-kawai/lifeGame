@@ -20,15 +20,23 @@ namespace LifeGame
         private Bitmap updateBmpB;
 
         // セルのサイズ
-        private int cellWidth = 20;
-        private int cellHight = 20;
+        private int cellWidth;
+        private int cellHight;
         // セルの数
-        private int cellCountWidth = 20;
-        private int cellCountHight = 20;
+        private int cellCountWidth;
+        private int cellCountHight;
 
-        private void LifeGameSetting(int cellCountWidth, int cellCountHight, int cellWidth, int cellHight)
+        private LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
         {
+            LifeGameSetting(cellCountWidth_, cellCountHight_, cellWidth_, cellHight_);
+        }
 
+        private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int cellWidth_, int cellHight_)
+        {
+            this.cellWidth = cellWidth_;
+            this.cellHight = cellHight_;
+            this.cellCountWidth = cellCountWidth_;
+            this.cellCountHight = cellCountWidth_;
         }
 
         private void InitLists()
