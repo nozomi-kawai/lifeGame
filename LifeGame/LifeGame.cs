@@ -29,6 +29,8 @@ namespace LifeGame
         private LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
         {
             LifeGameSetting(cellCountWidth_, cellCountHight_, cellWidth_, cellHight_);
+            InitLists(displayList);
+            InitLists(updateList);
         }
 
         private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int cellWidth_, int cellHight_)
@@ -39,7 +41,7 @@ namespace LifeGame
             this.cellCountHight = cellCountHight_;
         }
 
-        private void InitLists()
+        private void InitLists(List<List<bool>> initList_)
         {
             // 初期値を入れる
             for (int i = 0; i < cellCountHight; i++)
@@ -49,7 +51,7 @@ namespace LifeGame
                 {
                     listRow.Add(false);
                 }
-                updateList.Add(listRow);
+                initList_.Add(listRow);
             }
         }
 
