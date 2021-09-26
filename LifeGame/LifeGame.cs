@@ -36,14 +36,21 @@ namespace LifeGame
             this.cellWidth = cellWidth_;
             this.cellHight = cellHight_;
             this.cellCountWidth = cellCountWidth_;
-            this.cellCountHight = cellCountWidth_;
+            this.cellCountHight = cellCountHight_;
         }
 
         private void InitLists()
         {
             // 初期値を入れる
-            var listRow = new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false }
-            updateList.Add(listRow);
+            for (int i = 0; i < cellCountHight; i++)
+            {
+                var listRow = new List<bool>();
+                for (int j = 0; j < cellCountWidth; j++)
+                {
+                    listRow.Add(false);
+                }
+                updateList.Add(listRow);
+            }
         }
 
         /// <summary>
@@ -245,17 +252,17 @@ namespace LifeGame
 
             Graphics g = Graphics.FromImage(updateBmp);
 
-            for (int i = 0; i < mainList.Count; i++)
+            for (int i = 0; i < updateList.Count; i++)
             {
-                for (int j = 0; j < mainList[i].Count; j++)
+                for (int j = 0; j < updateList[i].Count; j++)
                 {
-                    if (!mainList[i][j])
+                    if (!updateList[i][j])
                     {
-                        g.FillRectangle(Brushes.Black, squareWidth * j, squareHight * i, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.Black, this.cellWidth * j, this.cellHight * i, this.cellWidth, this.cellHight);
                     }
                     else
                     {
-                        g.FillRectangle(Brushes.White, squareWidth * j, squareHight * i, squareWidth, squareHight);
+                        g.FillRectangle(Brushes.White, this.cellWidth * j, this.cellHight * i, this.cellWidth, this.cellHight);
                     }
                 }
             }
@@ -268,10 +275,10 @@ namespace LifeGame
         /// <returns>作成された新しいリスト</returns>
         private List<List<bool>> CreateList()
         {
-            List<List<bool>> updateList = new List<List<bool>>(mainList.Count);
-            for (int i = 0; i < mainList.Count; i++)
+            List<List<bool>> updateList = new List<List<bool>>(this.displayList.Count);
+            for (int i = 0; i < displayList.Count; i++)
             {
-                var row = Enumerable.Range(0, mainList.Count).Select(x => false).ToList();
+                var row = Enumerable.Range(0, displayList.Count).Select(x => false).ToList();
                 updateList.Add(row);
             }
 
@@ -286,8 +293,6 @@ namespace LifeGame
 
         public Bitmap displayNext()
         {
-            // TODO: そもそも更新かけるbmpを切り替えてから更新の関数に引数で渡すようにするか？
-
             // リストを更新する
             this.updateList = this.CreateList();
             // 画像を更新する
