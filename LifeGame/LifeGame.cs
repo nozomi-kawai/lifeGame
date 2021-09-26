@@ -9,15 +9,26 @@ namespace LifeGame
 {
     class LifeGame
     {
+        // Bitmap描画用のList
         private List<List<bool>> displayList;
         private List<List<bool>> updateList;
+
+        // 表示用のBitmap
         private Bitmap displayBmp;
+        // 更新用のBitmap
         private Bitmap updateBmpA;
         private Bitmap updateBmpB;
 
-        public void InitListCreater(List<List<bool>> mainList_)
+        // セルのサイズ
+        private int cellWidth = 20;
+        private int cellHight = 20;
+        // セルの数
+        private int cellCountWidth = 20;
+        private int cellCountHight = 20;
+
+        private void LifeGameSetting(int cellCountWidth, int cellCountHight, int cellWidth, int cellHight)
         {
-            this.updateList = mainList_;
+
         }
 
         private void InitLists()
@@ -30,153 +41,153 @@ namespace LifeGame
         /// <summary>
         /// 一行目の四隅のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateTopRowCornerCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateTopRowCornerCell(List<List<bool>> updateList)
         {
-            // mainLists[0]
+            // updateList[0]
             {
                 // 左上のセル
-                // mainLists[0][0]
+                // updateList[0][0]
                 {
                     var ltCells = new List<bool> {                         displayList[0][0 + 1],
                                                     displayList[0 + 1][0], displayList[0 + 1][0 + 1] };
                     var ltCellsBool = ltCells.Where(x => x == true).ToList().Count;
-                    nextList[0][0] = JudgementCell(displayList[0][0], ltCellsBool);
+                    updateList[0][0] = JudgementCell(displayList[0][0], ltCellsBool);
                 }
                 // 右上のセル
-                // mainLists[0][mainLists[0].Count - 1]
+                // updateList[0][updateList[0].Count - 1]
                 {
                     var rtCells = new List<bool> { displayList[0][displayList[0].Count - 1 - 1],
-                                                    displayList[0 + 1][displayList[0 + 1].Count - 1 - 1], displayList[0 + 1][displayList[0 + 1].Count - 1] };
+                                                   displayList[0 + 1][displayList[0 + 1].Count - 1 - 1], displayList[0 + 1][displayList[0 + 1].Count - 1] };
                     var rtCellsBool = rtCells.Where(x => x == true).ToList().Count;
-                    nextList[0][displayList[0].Count - 1] = JudgementCell(displayList[0][displayList[0].Count - 1], rtCellsBool);
+                    updateList[0][displayList[0].Count - 1] = JudgementCell(displayList[0][displayList[0].Count - 1], rtCellsBool);
                 }
             }
-            return nextList;
+            return updateList;
         }
 
         /// <summary>
         /// 最後の行の四隅のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateBottomRowCornerCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateBottomRowCornerCell(List<List<bool>> updateList)
         {
-            // mainLists[mainLists.Count - 1][mainLists[mainLists.Count - 1].Count - 1]
+            // updateList[updateList.Count - 1][updateList[updateList.Count - 1].Count - 1]
             {
                 // 左下のセル
-                // mainLists[mainLists.Count -1][0]
+                // updateList[updateList.Count -1][0]
                 {
                     var lbCells = new List<bool> { displayList[displayList.Count - 1 - 1][0], displayList[displayList.Count - 1 - 1][0 + 1],
                                                                                               displayList[displayList.Count - 1][0 + 1] };
                     var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
-                    nextList[displayList.Count - 1][0] = JudgementCell(displayList[displayList.Count - 1][0], lbCellsBool);
+                    updateList[displayList.Count - 1][0] = JudgementCell(displayList[displayList.Count - 1][0], lbCellsBool);
                 }
                 // 右下のセル
-                // mainLists[mainLists.Count -1][mainLists[mainLists.Count -1].Count -1]
+                // updateList[updateList.Count -1][updateList[updateList.Count -1].Count -1]
                 {
                     var rlbCells = new List<bool> { displayList[displayList.Count - 1 - 1][displayList[displayList.Count - 1 - 1].Count - 1 - 1], displayList[displayList.Count - 1 - 1][displayList[displayList.Count - 1 - 1].Count - 1],
                                                     displayList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1 - 1] };
                     var rbCellsBool = rlbCells.Where(x => x == true).ToList().Count;
-                    nextList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1] = JudgementCell(displayList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1], rbCellsBool);
+                    updateList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1] = JudgementCell(displayList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1], rbCellsBool);
                 }
             }
-            return nextList;
+            return updateList;
         }
 
         /// <summary>
         /// 四隅のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateCornerCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateCornerCell(List<List<bool>> updateList)
         {
-            nextList = CreateTopRowCornerCell(nextList);
-            nextList = CreateBottomRowCornerCell(nextList);
-            return nextList;
+            updateList = CreateTopRowCornerCell(updateList);
+            updateList = CreateBottomRowCornerCell(updateList);
+            return updateList;
         }
 
         /// <summary>
         /// 外側の行のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateOutsideRowCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateOutsideRowCell(List<List<bool>> updateList)
         {
             for (int j = 1; j < displayList[0].Count - 1 - 1; j++)
             {
                 // 一行目のセルについての処理
-                // mainLists[0][j]
+                // updateList[0][j]
                 {
                     var topRowCells = new List<bool>{ displayList[0][j - 1],                            displayList[0][j + 1],
                                                       displayList[0 + 1][j - 1], displayList[0 + 1][j], displayList[0 + 1][j + 1] };
                     var topRowCellsBool = topRowCells.Where(x => x == true).ToList().Count;
-                    nextList[0][j] = JudgementCell(displayList[0][j], topRowCellsBool);
+                    updateList[0][j] = JudgementCell(displayList[0][j], topRowCellsBool);
                 }
                 // 最後の行のセルについての処理
-                // mainLists[(mainLists.Count -1][j]
+                // updateList[(updateList.Count -1][j]
                 {
                     var bottomRowCells = new List<bool> { displayList[displayList.Count - 1 -1][j - 1], displayList[displayList.Count - 1 - 1][j], displayList[displayList.Count - 1 - 1][j + 1],
                                                           displayList[displayList.Count - 1][j - 1],                                               displayList[displayList.Count - 1][j + 1] };
                     var bottomRowCellsBool = bottomRowCells.Where(x => x == true).ToList().Count;
-                    nextList[displayList.Count - 1][j] = JudgementCell(displayList[displayList.Count - 1][j], bottomRowCellsBool);
+                    updateList[displayList.Count - 1][j] = JudgementCell(displayList[displayList.Count - 1][j], bottomRowCellsBool);
                 }
             }
-            return nextList;
+            return updateList;
         }
 
         /// <summary>
         /// 外側の列のセルのついての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateOutsideColumnCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateOutsideColumnCell(List<List<bool>> updateList)
         {
             // 
             for (int i = 1; i < displayList.Count - 1 - 1; i++)
             {
                 // 最初の列のセルについての処理
-                // mainLists[i][0]
+                // updateList[i][0]
                 {
                     var leftColumnCells = new List<bool> { displayList[i - 1][0], displayList[i - 1][0 + 1],
                                                                                   displayList[i][0 + 1],
                                                            displayList[i + 1][0], displayList[i + 1][0 + 1]};
                     var leftColumnCellsBool = leftColumnCells.Where(x => x == true).ToList().Count;
-                    nextList[i][0] = JudgementCell(displayList[i][0], leftColumnCellsBool);
+                    updateList[i][0] = JudgementCell(displayList[i][0], leftColumnCellsBool);
                 }
                 // 最後の列のセルについての処理
-                // mainLists[i][mainLists[i].Count - 1]
+                // updateList[i][updateList[i].Count - 1]
                 {
                     var rightColumnCells = new List<bool> { displayList[i - 1][displayList[i - 1].Count - 1 - 1], displayList[i - 1][displayList[i - 1].Count - 1],
                                                             displayList[i][displayList[i].Count - 1 - 1],
                                                             displayList[i + 1][displayList[i + 1].Count - 1 - 1], displayList[i + 1][displayList[i + 1].Count - 1] };
                     var rightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
-                    nextList[i][displayList[i].Count - 1] = JudgementCell(displayList[i][displayList[i].Count - 1], rightColumnCellsBool);
+                    updateList[i][displayList[i].Count - 1] = JudgementCell(displayList[i][displayList[i].Count - 1], rightColumnCellsBool);
                 }
             }
-            return nextList;
+            return updateList;
         }
 
         /// <summary>
         /// 外側のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateOutsideCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateOutsideCell(List<List<bool>> updateList)
         {
-            nextList = CreateOutsideRowCell(nextList);
-            nextList = CreateOutsideColumnCell(nextList);
+            updateList = CreateOutsideRowCell(updateList);
+            updateList = CreateOutsideColumnCell(updateList);
 
-            return nextList;
+            return updateList;
         }
 
         /// <summary>
         /// 内側のセルについての処理
         /// </summary>
-        /// <param name="nextList">変更するリスト</param>
+        /// <param name="updateList">変更するリスト</param>
         /// <returns>変更済みのリスト</returns>
-        private List<List<bool>> CreateCenterCell(List<List<bool>> nextList)
+        private List<List<bool>> CreateCenterCell(List<List<bool>> updateList)
         {
             for (int i = 1; i < displayList.Count - 1 - 1; i++)
             {
@@ -186,10 +197,10 @@ namespace LifeGame
                                                    displayList[i][j - 1],                            displayList[i][j + 1],
                                                    displayList[i + 1][j - 1], displayList[i + 1][j], displayList[i + 1][j + 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
-                    nextList[i][j] = JudgementCell(displayList[i][j], ijCellsBool);
+                    updateList[i][j] = JudgementCell(displayList[i][j], ijCellsBool);
                 }
             }
-            return nextList;
+            return updateList;
         }
 
         private bool JudgementCell(bool myselfBool, int cellsBool)
@@ -249,18 +260,18 @@ namespace LifeGame
         /// <returns>作成された新しいリスト</returns>
         private List<List<bool>> CreateList()
         {
-            List<List<bool>> nextList = new List<List<bool>>(mainList.Count);
+            List<List<bool>> updateList = new List<List<bool>>(mainList.Count);
             for (int i = 0; i < mainList.Count; i++)
             {
                 var row = Enumerable.Range(0, mainList.Count).Select(x => false).ToList();
-                nextList.Add(row);
+                updateList.Add(row);
             }
 
-            nextList = CreateCornerCell(nextList);
-            nextList = CreateOutsideCell(nextList);
-            nextList = CreateCenterCell(nextList);
+            updateList = CreateCornerCell(updateList);
+            updateList = CreateOutsideCell(updateList);
+            updateList = CreateCenterCell(updateList);
 
-            return nextList;
+            return updateList;
         }
 
 
