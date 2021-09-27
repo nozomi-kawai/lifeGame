@@ -10,8 +10,8 @@ namespace LifeGame
     class LifeGame
     {
         // Bitmap描画用のList
-        private List<List<bool>> displayList;
-        private List<List<bool>> updateList;
+        private List<List<bool>> displayList = new List<List<bool>>();
+        private List<List<bool>> updateList = new List<List<bool>>();
 
         // 表示用のBitmap
         private Bitmap displayBmp;
@@ -26,7 +26,7 @@ namespace LifeGame
         private int cellCountWidth;
         private int cellCountHight;
 
-        private LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
+        public LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
         {
             LifeGameSetting(cellCountWidth_, cellCountHight_, cellWidth_, cellHight_);
         }
@@ -305,8 +305,6 @@ namespace LifeGame
             return updateList;
         }
 
-
-
         public Bitmap displayNext()
         {
             // リストを更新する
@@ -325,5 +323,4 @@ namespace LifeGame
             return this.displayBmp;
         }
     }
-}
 }
