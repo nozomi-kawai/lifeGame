@@ -46,6 +46,13 @@ namespace LifeGame
             return this.InitImages();
         }
 
+        public Bitmap InitDebug()
+        {
+            this.debugList(displayList);
+            this.debugList(updateList);
+            return this.InitImages();
+        }
+
         private void InitLists(List<List<bool>> initList_)
         {
             // 初期値を入れる
@@ -58,6 +65,31 @@ namespace LifeGame
                 }
                 initList_.Add(listRow);
             }
+        }
+
+        public void debugList(List<List<bool>> initList_)
+        {
+            // 初期値を入れる
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
         }
 
         private Bitmap InitImages()
@@ -313,11 +345,11 @@ namespace LifeGame
             // 表示する画像を切り替える
             if (this.displayBmp == this.updateBmpA)
             {
-                displayBmp = CreateImage(this.updateBmpB);
+                this.displayBmp = CreateImage(this.updateBmpB);
             }
             else
             {
-                displayBmp = CreateImage(this.updateBmpA);
+                this.displayBmp = CreateImage(this.updateBmpA);
             }
 
             return this.displayBmp;

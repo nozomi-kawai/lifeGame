@@ -14,8 +14,6 @@ namespace LifeGame
 {
     public partial class Form1 : Form
     {
-        // 表示する画像
-        private Bitmap displayBmp;
         // セルの数
         private static int cellCountWidth = 20;
         private static int cellCountHight = 20;
@@ -30,7 +28,7 @@ namespace LifeGame
         public Form1()
         {           
             InitializeComponent();
-            this.pictureBox1.Image = lifeGame.Init();
+            this.pictureBox1.Image = lifeGame.InitDebug();
             // タイマースタート
             this.ImageUpdateTimer.Start();
         }
