@@ -29,8 +29,6 @@ namespace LifeGame
         private LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
         {
             LifeGameSetting(cellCountWidth_, cellCountHight_, cellWidth_, cellHight_);
-            InitLists(displayList);
-            InitLists(updateList);
         }
 
         private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int cellWidth_, int cellHight_)
@@ -39,6 +37,13 @@ namespace LifeGame
             this.cellHight = cellHight_;
             this.cellCountWidth = cellCountWidth_;
             this.cellCountHight = cellCountHight_;
+        }
+
+        public Bitmap Init()
+        {
+            this.InitLists(displayList);
+            this.InitLists(updateList);
+            return this.InitImages();
         }
 
         private void InitLists(List<List<bool>> initList_)
@@ -53,6 +58,15 @@ namespace LifeGame
                 }
                 initList_.Add(listRow);
             }
+        }
+
+        private Bitmap InitImages()
+        {
+            this.displayBmp = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
+            this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
+            this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
+            displayBmp = CreateImage(this.updateBmpA);
+            return displayBmp;
         }
 
         /// <summary>
