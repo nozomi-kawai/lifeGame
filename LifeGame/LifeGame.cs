@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -62,13 +62,14 @@ namespace LifeGame
 
         private void InitLists(List<List<bool>> initList_)
         {
+            Random random = new System.Random();
             // 初期値を入れる
-            for (int i = 0; i < cellCountHight; i++)
+            for (int i = 0; i < this.cellCountHeight; i++)
             {
                 var listRow = new List<bool>();
-                for (int j = 0; j < cellCountWidth; j++)
+                for (int j = 0; j < this.cellCountWidth; j++)
                 {
-                    listRow.Add(false);
+                    listRow.Add(random.Next(0, 2) == 0);
                 }
                 initList_.Add(listRow);
             }
