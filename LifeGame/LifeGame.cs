@@ -321,15 +321,8 @@ namespace LifeGame
         /// 新しいリストを作成して返す
         /// </summary>
         /// <returns>作成された新しいリスト</returns>
-        private List<List<bool>> CreateList()
+        private List<List<bool>> CreateList(List<List<bool>> updateList)
         {
-            List<List<bool>> updateList = new List<List<bool>>(this.displayList.Count);
-            for (int i = 0; i < displayList.Count; i++)
-            {
-                var row = Enumerable.Range(0, displayList.Count).Select(x => false).ToList();
-                updateList.Add(row);
-            }
-
             updateList = CreateCornerCell(updateList);
             updateList = CreateOutsideCell(updateList);
             updateList = CreateCenterCell(updateList);
@@ -337,10 +330,24 @@ namespace LifeGame
             return updateList;
         }
 
-        public Bitmap displayNext()
+        private List<List<bool>> updateDisplayList()
+        {
+            for (int r = 0; r < displayList.Count; r++)
+            {
+                for (int c = 0; c < displayList[r].Count; c++)
+                {
+                    this.displayList[r][c] = this.updateList[r][c];
+                }
+            }
+            return displayList;
+        }
+
+        public Bitmap nextGeneration()
         {
             // リストを更新する
-            this.updateList = this.CreateList();
+            this.updateList = this.CreateList(updateList);
+            // displayListもupdateList更新後に更新してあげないといけない
+            this.displayList = updateDisplayList();
             // 画像を更新する
             // 表示する画像を切り替える
             if (this.displayBmp == this.updateBmpA)
@@ -351,6 +358,7 @@ namespace LifeGame
             {
                 this.displayBmp = CreateImage(this.updateBmpA);
             }
+            
 
             return this.displayBmp;
         }

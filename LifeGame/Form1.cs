@@ -35,7 +35,7 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            this.pictureBox1.Image = lifeGame.displayNext();
+            this.pictureBox1.Image = lifeGame.nextGeneration();
         }
     }
 }
