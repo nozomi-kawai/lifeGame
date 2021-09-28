@@ -21,13 +21,14 @@ namespace LifeGame
         private static int cellWidth = 20;
         private static int cellHight = 20;
 
-        private static LifeGame lifeGame = new LifeGame(
-            cellCountWidth, cellCountHight, cellWidth, cellHight);
-
+        private static LifeGame lifeGame;
 
         public Form1()
         {           
             InitializeComponent();
+
+            lifeGame = new LifeGame(
+            cellCountWidth, cellCountHight, pictureBox1.Width, pictureBox1.Height);
             this.pictureBox1.Image = lifeGame.InitDebug();
             // タイマースタート
             this.ImageUpdateTimer.Start();
@@ -36,6 +37,11 @@ namespace LifeGame
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
             this.pictureBox1.Image = lifeGame.nextGeneration();
+        }
+
+        private void pictureBox1_Resize(object sender, EventArgs e)
+        {
+            lifeGame.rezizeWindow(pictureBox1.Width, pictureBox1.Height);
         }
     }
 }

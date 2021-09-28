@@ -26,17 +26,24 @@ namespace LifeGame
         private int cellCountWidth;
         private int cellCountHight;
 
-        public LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int cellWidth_ = 20, int cellHight_ = 20)
+        public LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int windowWidth_ = 20, int windowHight_ = 20)
         {
-            LifeGameSetting(cellCountWidth_, cellCountHight_, cellWidth_, cellHight_);
+            LifeGameSetting(cellCountWidth_, cellCountHight_, windowWidth_, windowHight_);
         }
 
-        private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int cellWidth_, int cellHight_)
+        private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int windowWidth_, int windowHight_)
         {
-            this.cellWidth = cellWidth_;
-            this.cellHight = cellHight_;
+            // windowの大きさ空セルの大きさを割り出して設定する
+            this.cellWidth = windowWidth_ / cellCountWidth_;
+            this.cellHight = windowHight_ / cellCountHight_;
             this.cellCountWidth = cellCountWidth_;
             this.cellCountHight = cellCountHight_;
+        }
+
+        public void rezizeWindow(int windowWidth_, int windowHight_)
+        {
+            LifeGameSetting(this.cellCountWidth, this.cellCountHight, windowWidth_, windowHight_);
+            this.InitImages();
         }
 
         public Bitmap Init()
@@ -97,7 +104,15 @@ namespace LifeGame
             this.displayBmp = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
             this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
             this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
-            displayBmp = CreateImage(this.updateBmpA);
+            // 表示する画像を切り替える
+            if (this.displayBmp == this.updateBmpA)
+            {
+                this.displayBmp = CreateImage(this.updateBmpB);
+            }
+            else
+            {
+                this.displayBmp = CreateImage(this.updateBmpA);
+            }
             return displayBmp;
         }
 

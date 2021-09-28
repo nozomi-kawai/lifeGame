@@ -44,6 +44,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(820, 477);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Resize += new System.EventHandler(this.pictureBox1_Resize);
             // 
             // ImageUpdateTimer
             // 
