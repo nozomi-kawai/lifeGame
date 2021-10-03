@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -21,42 +21,44 @@ namespace LifeGame
 
         // セルのサイズ
         private int cellWidth;
-        private int cellHight;
+        private int cellHeight;
         // セルの数
         private int cellCountWidth;
-        private int cellCountHight;
+        private int cellCountHeight;
 
-        public LifeGame(int cellCountWidth_ = 20, int cellCountHight_ = 20, int windowWidth_ = 20, int windowHight_ = 20)
+        public LifeGame(int cellCountWidth_ = 20, int cellCountHeight_ = 20, int windowWidth_ = 20 * 20, int windowHeight_ = 20 * 20, bool debugMode = true)
         {
-            LifeGameSetting(cellCountWidth_, cellCountHight_, windowWidth_, windowHight_);
+            if (debugMode)
+            {
+                this.LifeGameSetting();
+                this.debugInitList(displayList);
+                this.debugInitList(updateList);
+            }
+            else
+            {
+                this.LifeGameSetting();
+            }
         }
 
-        private void LifeGameSetting(int cellCountWidth_, int cellCountHight_, int windowWidth_, int windowHight_)
+        public void LifeGameSetting(int cellCountWidth_ = 20, int cellCountHeight_ = 20, int windowWidth_ = 20 * 20, int windowHeight_ = 20 * 20)
         {
             // windowの大きさ空セルの大きさを割り出して設定する
             this.cellWidth = windowWidth_ / cellCountWidth_;
-            this.cellHight = windowHight_ / cellCountHight_;
+            this.cellHeight = windowHeight_ / cellCountHeight_;
             this.cellCountWidth = cellCountWidth_;
-            this.cellCountHight = cellCountHight_;
+            this.cellCountHeight = cellCountHeight_;
         }
 
-        public void rezizeWindow(int windowWidth_, int windowHight_)
+        public void RezizeWindow(int windowWidth_, int windowHeight_)
         {
-            LifeGameSetting(this.cellCountWidth, this.cellCountHight, windowWidth_, windowHight_);
+            LifeGameSetting(this.cellCountWidth, this.cellCountHeight, windowWidth_, windowHeight_);
             this.InitImages();
         }
 
         public Bitmap Init()
         {
-            this.InitLists(displayList);
-            this.InitLists(updateList);
-            return this.InitImages();
-        }
-
-        public Bitmap InitDebug()
-        {
-            this.debugList(displayList);
-            this.debugList(updateList);
+            InitLists(this.displayList);
+            InitLists(this.updateList);
             return this.InitImages();
         }
 
@@ -75,7 +77,7 @@ namespace LifeGame
             }
         }
 
-        public void debugList(List<List<bool>> initList_)
+        public void debugInitList(List<List<bool>> initList_)
         {
             // 初期値を入れる
             initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
@@ -102,9 +104,9 @@ namespace LifeGame
 
         private Bitmap InitImages()
         {
-            this.displayBmp = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
-            this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
-            this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHight * this.cellHight);
+            this.displayBmp = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
+            this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
+            this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
             // 表示する画像を切り替える
             if (this.displayBmp == this.updateBmpA)
             {
@@ -322,11 +324,11 @@ namespace LifeGame
                 {
                     if (!updateList[i][j])
                     {
-                        g.FillRectangle(Brushes.Black, this.cellWidth * j, this.cellHight * i, this.cellWidth, this.cellHight);
+                        g.FillRectangle(Brushes.Black, this.cellWidth * j, this.cellHeight * i, this.cellWidth, this.cellHeight);
                     }
                     else
                     {
-                        g.FillRectangle(Brushes.White, this.cellWidth * j, this.cellHight * i, this.cellWidth, this.cellHight);
+                        g.FillRectangle(Brushes.White, this.cellWidth * j, this.cellHeight * i, this.cellWidth, this.cellHeight);
                     }
                 }
             }

@@ -16,20 +16,22 @@ namespace LifeGame
     {
         // セルの数
         private static int cellCountWidth = 20;
-        private static int cellCountHight = 20;
+        private static int cellCountHeight = 20;
         // セルのサイズ
+        // TODO セルのサイズは正方形がいい
         private static int cellWidth = 20;
-        private static int cellHight = 20;
+        private static int cellHeight = 20;
 
         private static LifeGame lifeGame;
+
+        private static bool debugMode = false;
 
         public Form1()
         {           
             InitializeComponent();
 
-            lifeGame = new LifeGame(
-            cellCountWidth, cellCountHight, pictureBox1.Width, pictureBox1.Height);
-            this.pictureBox1.Image = lifeGame.InitDebug();
+            lifeGame = new LifeGame(debugMode);
+            this.pictureBox1.Image = lifeGame.Init();
             // タイマースタート
             this.ImageUpdateTimer.Start();
         }
@@ -41,7 +43,7 @@ namespace LifeGame
 
         private void pictureBox1_Resize(object sender, EventArgs e)
         {
-            lifeGame.rezizeWindow(pictureBox1.Width, pictureBox1.Height);
+            lifeGame.RezizeWindow(pictureBox1.Width, pictureBox1.Height);
         }
     }
 }
