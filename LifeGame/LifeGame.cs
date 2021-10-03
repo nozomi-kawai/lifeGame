@@ -31,19 +31,19 @@ namespace LifeGame
         {
             if (!debugMode)
             {
-                this.LifeGameSetting(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
+                this.SettingLifeGameParam(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
                 InitLists(this.displayList);
                 InitLists(this.updateList);
             }
             else
             {
-                this.LifeGameSetting(20, 20, 20, 20);
+                this.SettingLifeGameParam(20, 20, 20, 20);
                 this.debugInitList(this.displayList);
                 this.debugInitList(this.updateList);
             }
         }
 
-        public void LifeGameSetting(int cellCountWidth, int cellCountHeight, int cellWidth, int cellHeight)
+        public void SettingLifeGameParam(int cellCountWidth, int cellCountHeight, int cellWidth, int cellHeight)
         {
             this.cellCountWidth = cellCountWidth;
             this.cellCountHeight = cellCountHeight;
