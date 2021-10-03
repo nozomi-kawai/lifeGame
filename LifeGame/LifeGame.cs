@@ -19,34 +19,34 @@ namespace LifeGame
         private Bitmap updateBmpA;
         private Bitmap updateBmpB;
 
-        // セルのサイズ
-        private int cellWidth;
-        private int cellHeight;
         // セルの数
         private int cellCountWidth;
         private int cellCountHeight;
 
-        public LifeGame(int cellCountWidth = 20, int cellCountHeight = 20, int cellWidth = 20, int cellHeight = 20, bool debugMode = true)
+        // セルのサイズ
+        private int cellWidth;
+        private int cellHeight;
+
+        public LifeGame(int cellCountWidth, int cellCountHeight, int cellWidth, int cellHeight, bool debugMode)
         {
             if (debugMode)
             {
-                this.LifeGameSetting();
+                this.LifeGameSetting(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
                 this.debugInitList(displayList);
                 this.debugInitList(updateList);
             }
             else
             {
-                this.LifeGameSetting();
+                this.LifeGameSetting(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
             }
         }
 
-        public void LifeGameSetting(int cellCountWidth = 20, int cellCountHeight = 20, int cellWidth = 20, int cellHeight = 20)
+        public void LifeGameSetting(int cellCountWidth, int cellCountHeight, int cellWidth, int cellHeight)
         {
-            // windowの大きさ空セルの大きさを割り出して設定する
-            this.cellWidth = windowWidth / cellCountWidth;
-            this.cellHeight = windowHeight / cellCountHeight;
             this.cellCountWidth = cellCountWidth;
             this.cellCountHeight = cellCountHeight;
+            this.cellWidth = cellWidth;
+            this.cellHeight = cellHeight;
         }
 
         public void RezizeWindow(int windowWidth, int windowHeight)
@@ -104,7 +104,6 @@ namespace LifeGame
 
         private Bitmap InitImages()
         {
-            this.displayBmp = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
             this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
             this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
             // 表示する画像を切り替える
