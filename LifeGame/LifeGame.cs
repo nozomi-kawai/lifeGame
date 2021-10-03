@@ -49,12 +49,6 @@ namespace LifeGame
             this.cellHeight = cellHeight;
         }
 
-        public void RezizeWindow(int windowWidth, int windowHeight)
-        {
-            LifeGameSetting(this.cellCountWidth, this.cellCountHeight, windowWidth, windowHeight);
-            this.InitImages();
-        }
-
         public Bitmap Init()
         {
             InitLists(this.displayList);
