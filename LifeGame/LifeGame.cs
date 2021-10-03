@@ -26,7 +26,7 @@ namespace LifeGame
         private int cellCountWidth;
         private int cellCountHeight;
 
-        public LifeGame(int cellCountWidth_ = 20, int cellCountHeight_ = 20, int windowWidth_ = 20 * 20, int windowHeight_ = 20 * 20, bool debugMode = true)
+        public LifeGame(int cellCountWidth = 20, int cellCountHeight = 20, int cellWidth = 20, int cellHeight = 20, bool debugMode = true)
         {
             if (debugMode)
             {
@@ -40,18 +40,18 @@ namespace LifeGame
             }
         }
 
-        public void LifeGameSetting(int cellCountWidth_ = 20, int cellCountHeight_ = 20, int windowWidth_ = 20 * 20, int windowHeight_ = 20 * 20)
+        public void LifeGameSetting(int cellCountWidth = 20, int cellCountHeight = 20, int cellWidth = 20, int cellHeight = 20)
         {
             // windowの大きさ空セルの大きさを割り出して設定する
-            this.cellWidth = windowWidth_ / cellCountWidth_;
-            this.cellHeight = windowHeight_ / cellCountHeight_;
-            this.cellCountWidth = cellCountWidth_;
-            this.cellCountHeight = cellCountHeight_;
+            this.cellWidth = windowWidth / cellCountWidth;
+            this.cellHeight = windowHeight / cellCountHeight;
+            this.cellCountWidth = cellCountWidth;
+            this.cellCountHeight = cellCountHeight;
         }
 
-        public void RezizeWindow(int windowWidth_, int windowHeight_)
+        public void RezizeWindow(int windowWidth, int windowHeight)
         {
-            LifeGameSetting(this.cellCountWidth, this.cellCountHeight, windowWidth_, windowHeight_);
+            LifeGameSetting(this.cellCountWidth, this.cellCountHeight, windowWidth, windowHeight);
             this.InitImages();
         }
 
@@ -62,7 +62,7 @@ namespace LifeGame
             return this.InitImages();
         }
 
-        private void InitLists(List<List<bool>> initList_)
+        private void InitLists(List<List<bool>> initList)
         {
             Random random = new System.Random();
             // 初期値を入れる
@@ -73,33 +73,33 @@ namespace LifeGame
                 {
                     listRow.Add(random.Next(0, 2) == 0);
                 }
-                initList_.Add(listRow);
+                initList.Add(listRow);
             }
         }
 
-        public void debugInitList(List<List<bool>> initList_)
+        public void debugInitList(List<List<bool>> initList)
         {
             // 初期値を入れる
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
-            initList_.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, true,  false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
+            initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
         }
 
         private Bitmap InitImages()
