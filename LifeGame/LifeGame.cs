@@ -100,15 +100,7 @@ namespace LifeGame
         {
             this.updateBmpA = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
             this.updateBmpB = new Bitmap(this.cellCountWidth * this.cellWidth, this.cellCountHeight * this.cellHeight);
-            // 表示する画像を切り替える
-            if (this.displayBmp == this.updateBmpA)
-            {
-                this.displayBmp = CreateImage(this.updateBmpB);
-            }
-            else
-            {
-                this.displayBmp = CreateImage(this.updateBmpA);
-            }
+            this.displayBmp = CreateImage(this.updateBmpA);
             return displayBmp;
         }
 

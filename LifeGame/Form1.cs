@@ -30,7 +30,7 @@ namespace LifeGame
         {           
             InitializeComponent();
 
-            lifeGame = new LifeGame(debugMode);
+            lifeGame = new LifeGame(cellCountWidth, cellCountHeight, cellWidth, cellHeight, debugMode);
             this.pictureBox1.Image = lifeGame.Init();
             // タイマースタート
             this.ImageUpdateTimer.Start();
@@ -39,11 +39,6 @@ namespace LifeGame
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
             this.pictureBox1.Image = lifeGame.nextGeneration();
-        }
-
-        private void pictureBox1_Resize(object sender, EventArgs e)
-        {
-            lifeGame.RezizeWindow(pictureBox1.Width, pictureBox1.Height);
         }
     }
 }
