@@ -29,15 +29,17 @@ namespace LifeGame
 
         public LifeGame(int cellCountWidth, int cellCountHeight, int cellWidth, int cellHeight, bool debugMode)
         {
-            if (debugMode)
+            if (!debugMode)
             {
                 this.LifeGameSetting(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
-                this.debugInitList(displayList);
-                this.debugInitList(updateList);
+                InitLists(this.displayList);
+                InitLists(this.updateList);
             }
             else
             {
-                this.LifeGameSetting(cellCountWidth, cellCountHeight, cellWidth, cellHeight);
+                this.LifeGameSetting(20, 20, 20, 20);
+                this.debugInitList(this.displayList);
+                this.debugInitList(this.updateList);
             }
         }
 
@@ -51,8 +53,6 @@ namespace LifeGame
 
         public Bitmap Init()
         {
-            InitLists(this.displayList);
-            InitLists(this.updateList);
             return this.InitImages();
         }
 
@@ -116,18 +116,18 @@ namespace LifeGame
                 // 左上のセル
                 // updateList[0][0]
                 {
-                    var ltCells = new List<bool> {                         displayList[0][0 + 1],
-                                                    displayList[0 + 1][0], displayList[0 + 1][0 + 1] };
+                    var ltCells = new List<bool> {                              this.displayList[0][0 + 1],
+                                                    this.displayList[0 + 1][0], this.displayList[0 + 1][0 + 1] };
                     var ltCellsBool = ltCells.Where(x => x == true).ToList().Count;
-                    updateList[0][0] = JudgementCell(displayList[0][0], ltCellsBool);
+                    updateList[0][0] = JudgementCell(this.displayList[0][0], ltCellsBool);
                 }
                 // 右上のセル
                 // updateList[0][updateList[0].Count - 1]
                 {
-                    var rtCells = new List<bool> { displayList[0][displayList[0].Count - 1 - 1],
-                                                   displayList[0 + 1][displayList[0 + 1].Count - 1 - 1], displayList[0 + 1][displayList[0 + 1].Count - 1] };
+                    var rtCells = new List<bool> { this.displayList[0][this.displayList[0].Count - 1 - 1],
+                                                   this.displayList[0 + 1][this.displayList[0 + 1].Count - 1 - 1], this.displayList[0 + 1][this.displayList[0 + 1].Count - 1] };
                     var rtCellsBool = rtCells.Where(x => x == true).ToList().Count;
-                    updateList[0][displayList[0].Count - 1] = JudgementCell(displayList[0][displayList[0].Count - 1], rtCellsBool);
+                    updateList[0][this.displayList[0].Count - 1] = JudgementCell(this.displayList[0][this.displayList[0].Count - 1], rtCellsBool);
                 }
             }
             return updateList;
@@ -145,18 +145,18 @@ namespace LifeGame
                 // 左下のセル
                 // updateList[updateList.Count -1][0]
                 {
-                    var lbCells = new List<bool> { displayList[displayList.Count - 1 - 1][0], displayList[displayList.Count - 1 - 1][0 + 1],
-                                                                                              displayList[displayList.Count - 1][0 + 1] };
+                    var lbCells = new List<bool> { this.displayList[this.displayList.Count - 1 - 1][0], this.displayList[this.displayList.Count - 1 - 1][0 + 1],
+                                                                                                        this.displayList[this.displayList.Count - 1][0 + 1] };
                     var lbCellsBool = lbCells.Where(x => x == true).ToList().Count;
                     updateList[displayList.Count - 1][0] = JudgementCell(displayList[displayList.Count - 1][0], lbCellsBool);
                 }
                 // 右下のセル
                 // updateList[updateList.Count -1][updateList[updateList.Count -1].Count -1]
                 {
-                    var rlbCells = new List<bool> { displayList[displayList.Count - 1 - 1][displayList[displayList.Count - 1 - 1].Count - 1 - 1], displayList[displayList.Count - 1 - 1][displayList[displayList.Count - 1 - 1].Count - 1],
-                                                    displayList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1 - 1] };
+                    var rlbCells = new List<bool> { this.displayList[this.displayList.Count - 1 - 1][this.displayList[this.displayList.Count - 1 - 1].Count - 1 - 1], this.displayList[this.displayList.Count - 1 - 1][this.displayList[this.displayList.Count - 1 - 1].Count - 1],
+                                                    this.displayList[this.displayList.Count - 1][this.displayList[this.displayList.Count - 1].Count - 1 - 1] };
                     var rbCellsBool = rlbCells.Where(x => x == true).ToList().Count;
-                    updateList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1] = JudgementCell(displayList[displayList.Count - 1][displayList[displayList.Count - 1].Count - 1], rbCellsBool);
+                    updateList[this.displayList.Count - 1][this.displayList[this.displayList.Count - 1].Count - 1] = JudgementCell(this.displayList[this.displayList.Count - 1][this.displayList[this.displayList.Count - 1].Count - 1], rbCellsBool);
                 }
             }
             return updateList;
@@ -181,21 +181,21 @@ namespace LifeGame
         /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateOutsideRowCell(List<List<bool>> updateList)
         {
-            for (int j = 1; j < displayList[0].Count - 1 - 1; j++)
+            for (int j = 1; j < this.displayList[0].Count - 1 - 1; j++)
             {
                 // 一行目のセルについての処理
                 // updateList[0][j]
                 {
-                    var topRowCells = new List<bool>{ displayList[0][j - 1],                            displayList[0][j + 1],
-                                                      displayList[0 + 1][j - 1], displayList[0 + 1][j], displayList[0 + 1][j + 1] };
+                    var topRowCells = new List<bool>{ this.displayList[0][j - 1],                                 this.displayList[0][j + 1],
+                                                      this.displayList[0 + 1][j - 1], this.displayList[0 + 1][j], this.displayList[0 + 1][j + 1] };
                     var topRowCellsBool = topRowCells.Where(x => x == true).ToList().Count;
-                    updateList[0][j] = JudgementCell(displayList[0][j], topRowCellsBool);
+                    updateList[0][j] = JudgementCell(this.displayList[0][j], topRowCellsBool);
                 }
                 // 最後の行のセルについての処理
                 // updateList[(updateList.Count -1][j]
                 {
-                    var bottomRowCells = new List<bool> { displayList[displayList.Count - 1 -1][j - 1], displayList[displayList.Count - 1 - 1][j], displayList[displayList.Count - 1 - 1][j + 1],
-                                                          displayList[displayList.Count - 1][j - 1],                                               displayList[displayList.Count - 1][j + 1] };
+                    var bottomRowCells = new List<bool> { this.displayList[displayList.Count - 1 - 1][j - 1], this.displayList[displayList.Count - 1 - 1][j], this.displayList[displayList.Count - 1 - 1][j + 1],
+                                                          this.displayList[displayList.Count - 1][j - 1],                                                     this.displayList[displayList.Count - 1][j + 1] };
                     var bottomRowCellsBool = bottomRowCells.Where(x => x == true).ToList().Count;
                     updateList[displayList.Count - 1][j] = JudgementCell(displayList[displayList.Count - 1][j], bottomRowCellsBool);
                 }
@@ -211,25 +211,25 @@ namespace LifeGame
         private List<List<bool>> CreateOutsideColumnCell(List<List<bool>> updateList)
         {
             // 
-            for (int i = 1; i < displayList.Count - 1 - 1; i++)
+            for (int i = 1; i < this.displayList.Count - 1 - 1; i++)
             {
                 // 最初の列のセルについての処理
                 // updateList[i][0]
                 {
-                    var leftColumnCells = new List<bool> { displayList[i - 1][0], displayList[i - 1][0 + 1],
-                                                                                  displayList[i][0 + 1],
-                                                           displayList[i + 1][0], displayList[i + 1][0 + 1]};
+                    var leftColumnCells = new List<bool> { this.displayList[i - 1][0], this.displayList[i - 1][0 + 1],
+                                                                                       this.displayList[i][0 + 1],
+                                                           this.displayList[i + 1][0], this.displayList[i + 1][0 + 1]};
                     var leftColumnCellsBool = leftColumnCells.Where(x => x == true).ToList().Count;
-                    updateList[i][0] = JudgementCell(displayList[i][0], leftColumnCellsBool);
+                    updateList[i][0] = JudgementCell(this.displayList[i][0], leftColumnCellsBool);
                 }
                 // 最後の列のセルについての処理
                 // updateList[i][updateList[i].Count - 1]
                 {
-                    var rightColumnCells = new List<bool> { displayList[i - 1][displayList[i - 1].Count - 1 - 1], displayList[i - 1][displayList[i - 1].Count - 1],
-                                                            displayList[i][displayList[i].Count - 1 - 1],
-                                                            displayList[i + 1][displayList[i + 1].Count - 1 - 1], displayList[i + 1][displayList[i + 1].Count - 1] };
+                    var rightColumnCells = new List<bool> { this.displayList[i - 1][this.displayList[i - 1].Count - 1 - 1], this.displayList[i - 1][this.displayList[i - 1].Count - 1],
+                                                            this.displayList[i][this.displayList[i].Count - 1 - 1],
+                                                            this.displayList[i + 1][this.displayList[i + 1].Count - 1 - 1], this.displayList[i + 1][this.displayList[i + 1].Count - 1] };
                     var rightColumnCellsBool = rightColumnCells.Where(x => x == true).ToList().Count;
-                    updateList[i][displayList[i].Count - 1] = JudgementCell(displayList[i][displayList[i].Count - 1], rightColumnCellsBool);
+                    updateList[i][this.displayList[i].Count - 1] = JudgementCell(this.displayList[i][this.displayList[i].Count - 1], rightColumnCellsBool);
                 }
             }
             return updateList;
@@ -255,13 +255,13 @@ namespace LifeGame
         /// <returns>変更済みのリスト</returns>
         private List<List<bool>> CreateCenterCell(List<List<bool>> updateList)
         {
-            for (int i = 1; i < displayList.Count - 1 - 1; i++)
+            for (int i = 1; i < this.displayList.Count - 1 - 1; i++)
             {
                 for (int j = 1; j < displayList[i].Count - 1 - 1; j++)
                 {
-                    var ijCells = new List<bool> { displayList[i - 1][j - 1], displayList[i - 1][j], displayList[i - 1][j + 1],
-                                                   displayList[i][j - 1],                            displayList[i][j + 1],
-                                                   displayList[i + 1][j - 1], displayList[i + 1][j], displayList[i + 1][j + 1] };
+                    var ijCells = new List<bool> { this.displayList[i - 1][j - 1], this.displayList[i - 1][j], this.displayList[i - 1][j + 1],
+                                                   this.displayList[i][j - 1],                                 this.displayList[i][j + 1],
+                                                   this.displayList[i + 1][j - 1], this.displayList[i + 1][j], this.displayList[i + 1][j + 1] };
                     var ijCellsBool = ijCells.Where(x => x == true).ToList().Count;
                     updateList[i][j] = JudgementCell(displayList[i][j], ijCellsBool);
                 }
@@ -335,20 +335,20 @@ namespace LifeGame
 
         private List<List<bool>> updateDisplayList()
         {
-            for (int r = 0; r < displayList.Count; r++)
+            for (int r = 0; r < this.displayList.Count; r++)
             {
-                for (int c = 0; c < displayList[r].Count; c++)
+                for (int c = 0; c < this.displayList[r].Count; c++)
                 {
                     this.displayList[r][c] = this.updateList[r][c];
                 }
             }
-            return displayList;
+            return this.displayList;
         }
 
         public Bitmap nextGeneration()
         {
             // リストを更新する
-            this.updateList = this.CreateList(updateList);
+            this.updateList = this.CreateList(this.updateList);
             // displayListもupdateList更新後に更新してあげないといけない
             this.displayList = updateDisplayList();
             // 画像を更新する
@@ -362,7 +362,6 @@ namespace LifeGame
                 this.displayBmp = CreateImage(this.updateBmpA);
             }
             
-
             return this.displayBmp;
         }
     }
