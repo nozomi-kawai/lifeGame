@@ -15,16 +15,15 @@ namespace LifeGame
     public partial class Form1 : Form
     {
         // セルの数
-        private static int cellCountWidth = 30;
-        private static int cellCountHeight = 30;
+        private int cellCountWidth = 30;
+        private int cellCountHeight = 30;
         // セルのサイズ
-        // TODO セルのサイズは正方形がいい
-        private static int cellWidth = 10;
-        private static int cellHeight = 10;
+        private int cellWidth = 10;
+        private int cellHeight = 10;
 
-        private static LifeGame lifeGame;
+        private LifeGame lifeGame;
 
-        private static bool debugMode = true;
+        private bool debugMode = false;
 
         public Form1()
         {           
@@ -37,7 +36,7 @@ namespace LifeGame
 
         private void ImageUpdateTimer_Tick(object sender, EventArgs e)
         {
-            this.pictureBox1.Image = lifeGame.nextGeneration();
+            this.pictureBox1.Image = lifeGame.NextGeneration();
         }
     }
 }

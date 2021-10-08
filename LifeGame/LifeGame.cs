@@ -38,8 +38,8 @@ namespace LifeGame
             else
             {
                 this.SettingLifeGameParam(20, 20, 20, 20);
-                this.debugInitList(this.displayList);
-                this.debugInitList(this.updateList);
+                this.DebugInitList(this.displayList);
+                this.DebugInitList(this.updateList);
             }
         }
 
@@ -71,7 +71,7 @@ namespace LifeGame
             }
         }
 
-        public void debugInitList(List<List<bool>> initList)
+        public void DebugInitList(List<List<bool>> initList)
         {
             // 初期値を入れる
             initList.Add(new List<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false });
@@ -149,6 +149,7 @@ namespace LifeGame
                         nextColumn = c + 1;
                     }
 
+                    // FixMe: 縁の判定がなんだかおかしい?
                     var rcCells = new List<bool> { this.displayList[bkRow][bkColumn],   this.displayList[bkRow][c],   this.displayList[bkRow][nextColumn],
                                                    this.displayList[r][bkColumn],                                     this.displayList[r][nextColumn],
                                                    this.displayList[nextRow][bkColumn], this.displayList[nextRow][c], this.displayList[nextRow][nextColumn] };
@@ -221,7 +222,7 @@ namespace LifeGame
             return updateList;
         }
 
-        private List<List<bool>> updateDisplayList()
+        private List<List<bool>> UpdateDisplayList()
         {
             for (int r = 0; r < this.displayList.Count; r++)
             {
@@ -233,12 +234,12 @@ namespace LifeGame
             return this.displayList;
         }
 
-        public Bitmap nextGeneration()
+        public Bitmap NextGeneration()
         {
             // リストを更新する
             this.updateList = this.CreateList(this.updateList);
             // displayListもupdateList更新後に更新してあげないといけない
-            this.displayList = updateDisplayList();
+            this.displayList = UpdateDisplayList();
             // 画像を更新する
             // 表示する画像を切り替える
             if (this.displayBmp == this.updateBmpA)
